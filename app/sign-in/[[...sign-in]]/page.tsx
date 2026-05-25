@@ -13,6 +13,7 @@ export default function SignInPage() {
     >
       {/* Left panel — branding */}
       <div
+        data-testid="dark-panel"
         className="hidden lg:flex flex-col justify-between w-[420px] shrink-0 p-12"
         style={{
           background: 'var(--brand-black)',
