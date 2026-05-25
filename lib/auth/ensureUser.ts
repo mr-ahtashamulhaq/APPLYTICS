@@ -1,6 +1,6 @@
 /**
  * Ensures a user row exists in Supabase for the given Clerk userId.
- * Call this at the top of any server action or API route that needs user data.
+ * Call at the top of any server action or API route that needs user data.
  * No webhook needed — creates the row lazily on first call.
  */
 import { supabaseAdmin } from '@/lib/supabase/admin'
@@ -14,18 +14,17 @@ export async function ensureUser(
   const { data: existing } = await supabaseAdmin
     .from('users')
     .select('id')
-    .eq('clerk_id', clerkUserId)
+    .eq('clerk_user_id', clerkUserId)
     .single()
 
   if (existing) return // Already synced
 
   // Insert new user row
   const { error } = await supabaseAdmin.from('users').insert({
-    clerk_id: clerkUserId,
+    clerk_user_id: clerkUserId,
     email: email ?? '',
-    full_name: fullName ?? null,
+    name: fullName ?? null,
     created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
   })
 
   if (error && error.code !== '23505') {

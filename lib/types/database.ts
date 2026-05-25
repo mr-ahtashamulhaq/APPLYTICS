@@ -16,6 +16,8 @@ export interface Profile {
   user_id: string
   phone: string | null
   city: string | null
+  linkedin_url: string | null
+  portfolio_url: string | null
   degree: string | null
   university: string | null
   graduation_status: string | null
