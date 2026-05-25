@@ -305,4 +305,8 @@
   /* Hairline divider */
   .divider-h { border-top: 1px solid var(--hairline); }
   .divider-v { border-left: 1px solid var(--hairline); }
+
+  /* Row hover — use on server-component rows instead of onMouseEnter */
+  .row-hover { transition: background 120ms ease; }
+  .row-hover:hover { background: var(--surface) !important; }
 }

@@ -119,4 +119,22 @@ test.describe('Applytics Smoke Tests', () => {
     // Geist is loaded via next/font — variable name __className_* maps to it
     expect(fontFamily.toLowerCase()).toContain('geist')
   })
+
+  test('/app/generate — redirects unauthenticated to sign-in', async ({ page }) => {
+    await page.goto(`${BASE}/app/generate`, { waitUntil: 'networkidle' })
+    expect(page.url()).toContain('/sign-in')
+    expect(await hasRuntimeError(page)).toBe(false)
+  })
+
+  test('/app/profile — redirects unauthenticated to sign-in', async ({ page }) => {
+    await page.goto(`${BASE}/app/profile`, { waitUntil: 'networkidle' })
+    expect(page.url()).toContain('/sign-in')
+    expect(await hasRuntimeError(page)).toBe(false)
+  })
+
+  test('/app/tracker — redirects unauthenticated to sign-in', async ({ page }) => {
+    await page.goto(`${BASE}/app/tracker`, { waitUntil: 'networkidle' })
+    expect(page.url()).toContain('/sign-in')
+    expect(await hasRuntimeError(page)).toBe(false)
+  })
 })

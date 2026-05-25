@@ -176,13 +176,11 @@ export default async function DashboardPage() {
                 <Link
                   key={r.id}
                   href={`/app/generate/result/${r.id}`}
-                  className="flex items-center justify-between px-5 py-3 transition-colors group"
+                  className="row-hover flex items-center justify-between px-5 py-3"
                   style={{
                     borderBottom: i < recentResumes.length - 1 ? '1px solid var(--hairline)' : 'none',
                     background: 'var(--canvas)',
                   }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--surface)' }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'var(--canvas)' }}
                 >
                   <div className="min-w-0">
                     <p className="text-sm font-medium truncate" style={{ color: 'var(--ink-deep)' }}>
