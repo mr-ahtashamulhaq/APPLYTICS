@@ -39,10 +39,12 @@ function StatusSelect({
   id,
   current,
   onUpdate,
+  onStatusChange,
 }: {
   id: string
   current: ApplicationStatus
   onUpdate: () => void
+  onStatusChange: (id: string, status: ApplicationStatus) => void
 }) {
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
@@ -50,9 +52,10 @@ function StatusSelect({
 
   const select = (status: ApplicationStatus) => {
     setOpen(false)
+    onStatusChange(id, status)          // ← instant optimistic update
     startTransition(async () => {
       await updateApplicationStatus(id, status)
-      onUpdate()
+      onUpdate()                        // ← background server sync
     })
   }
 
@@ -301,7 +304,11 @@ export default function TrackerTable({ initialApplications, defaultCompany, defa
   const [filter, setFilter] = useState<ApplicationStatus | 'All'>('All')
   const [isPending, startTransition] = useTransition()
 
-  // Status update — optimistic: update local state + background server refresh
+  // Status update — optimistic local state change, background server sync
+  const handleStatusChange = (id: string, status: ApplicationStatus) => {
+    setApps(prev => prev.map(a => a.id === id ? { ...a, status } : a))
+  }
+
   const handleStatusUpdated = () => {
     router.refresh()
   }
@@ -432,7 +439,12 @@ export default function TrackerTable({ initialApplications, defaultCompany, defa
                   )}
                 </div>
                 <div style={{ overflow: 'visible' }}>
-                  <StatusSelect id={app.id} current={app.status} onUpdate={handleStatusUpdated} />
+                  <StatusSelect
+                    id={app.id}
+                    current={app.status}
+                    onUpdate={handleStatusUpdated}
+                    onStatusChange={handleStatusChange}
+                  />
                 </div>
                 <span className="text-xs" style={{ color: 'var(--stone)' }}>
                   {app.applied_date
