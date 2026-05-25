@@ -52,3 +52,6 @@ MVP-requirement-document.md
 mvp-tech-doc.md
 .agents/
 .env.local.example
+passwords.md
+.env.local
+components.md

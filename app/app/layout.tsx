@@ -1,16 +1,31 @@
-// This layout wraps all protected /app/* routes
-// Phase 2 will add: sidebar navigation, top bar, and full design system
-// For now it's a plain passthrough so the route structure is established
+import { auth } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
+import Sidebar from '@/components/layout/Sidebar'
+import MobileTopBar from '@/components/layout/MobileTopBar'
 
-export default function AppLayout({
+export default async function AppLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const { userId } = await auth()
+  if (!userId) redirect('/sign-in')
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Phase 2: Sidebar + TopBar will go here */}
-      <main className="p-6">{children}</main>
+    <div className="flex min-h-dvh" style={{ background: 'var(--surface-soft)' }}>
+      {/* Desktop sidebar */}
+      <Sidebar />
+
+      {/* Main content area */}
+      <div className="flex flex-col flex-1 min-w-0">
+        {/* Mobile top bar (hidden on md+) */}
+        <MobileTopBar />
+
+        {/* Page content */}
+        <main className="flex-1 p-6 md:p-8">
+          {children}
+        </main>
+      </div>
     </div>
   )
 }
