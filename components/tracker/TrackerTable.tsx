@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -33,21 +34,16 @@ const addSchema = z.object({
 })
 type AddForm = z.infer<typeof addSchema>
 
-// ── Status badge ─────────────────────────────────────────────────
-function StatusBadge({ status }: { status: ApplicationStatus }) {
-  const cfg = STATUS_CONFIG[status]
-  return (
-    <span
-      className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded"
-      style={{ background: cfg.bg, color: cfg.color, borderRadius: 'var(--radius-xs)' }}
-    >
-      {cfg.label}
-    </span>
-  )
-}
-
-// ── Status select (inline) ───────────────────────────────────────
-function StatusSelect({ id, current, onUpdate }: { id: string; current: ApplicationStatus; onUpdate: () => void }) {
+// ── Status select — opens UPWARD to avoid clipping ───────────────
+function StatusSelect({
+  id,
+  current,
+  onUpdate,
+}: {
+  id: string
+  current: ApplicationStatus
+  onUpdate: () => void
+}) {
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
   const cfg = STATUS_CONFIG[current]
@@ -65,8 +61,13 @@ function StatusSelect({ id, current, onUpdate }: { id: string; current: Applicat
       <button
         onClick={() => setOpen(!open)}
         disabled={isPending}
-        className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium rounded transition-opacity"
-        style={{ background: cfg.bg, color: cfg.color, borderRadius: 'var(--radius-xs)', opacity: isPending ? 0.6 : 1 }}
+        className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium transition-opacity"
+        style={{
+          background: cfg.bg,
+          color: cfg.color,
+          borderRadius: 'var(--radius-xs)',
+          opacity: isPending ? 0.6 : 1,
+        }}
       >
         {cfg.label}
         <CaretUpDown size={10} />
@@ -74,35 +75,47 @@ function StatusSelect({ id, current, onUpdate }: { id: string; current: Applicat
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.12 }}
-            className="absolute left-0 top-full mt-1 z-30 rounded-lg overflow-hidden"
-            style={{
-              border: '1px solid var(--hairline)',
-              background: 'var(--canvas)',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
-              minWidth: '130px',
-            }}
-          >
-            {STATUSES.map((s) => (
-              <button
-                key={s}
-                onClick={() => select(s)}
-                className="w-full text-left px-3 py-2 text-xs font-medium transition-colors"
-                style={{
-                  color: STATUS_CONFIG[s].color,
-                  background: current === s ? STATUS_CONFIG[s].bg : 'transparent',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = STATUS_CONFIG[s].bg }}
-                onMouseLeave={e => { e.currentTarget.style.background = current === s ? STATUS_CONFIG[s].bg : 'transparent' }}
-              >
-                {STATUS_CONFIG[s].label}
-              </button>
-            ))}
-          </motion.div>
+          <>
+            {/* Click-away overlay */}
+            <div
+              className="fixed inset-0 z-20"
+              onClick={() => setOpen(false)}
+            />
+            {/* Dropdown — opens UPWARD */}
+            <motion.div
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 4 }}
+              transition={{ duration: 0.12 }}
+              className="absolute left-0 bottom-full mb-1 z-30 rounded-lg overflow-hidden"
+              style={{
+                border: '1px solid var(--hairline)',
+                background: 'var(--canvas)',
+                boxShadow: '0 -4px 20px rgba(0,0,0,0.12)',
+                minWidth: '130px',
+              }}
+            >
+              {STATUSES.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => select(s)}
+                  className="w-full text-left px-3 py-2 text-xs font-medium transition-colors"
+                  style={{
+                    color: STATUS_CONFIG[s].color,
+                    background: current === s ? STATUS_CONFIG[s].bg : 'transparent',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = STATUS_CONFIG[s].bg }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = current === s
+                      ? STATUS_CONFIG[s].bg
+                      : 'transparent'
+                  }}
+                >
+                  {STATUS_CONFIG[s].label}
+                </button>
+              ))}
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>
@@ -113,11 +126,13 @@ function StatusSelect({ id, current, onUpdate }: { id: string; current: Applicat
 function AddModal({
   isOpen,
   onClose,
+  onAdded,
   defaultCompany,
   defaultRole,
 }: {
   isOpen: boolean
   onClose: () => void
+  onAdded: (app: Application) => void
   defaultCompany?: string
   defaultRole?: string
 }) {
@@ -137,7 +152,12 @@ function AddModal({
     setError('')
     startTransition(async () => {
       const res = await addApplication(data)
-      if (res.success) {
+      if (res.success && res.application) {
+        reset()
+        onAdded(res.application)
+        onClose()
+      } else if (res.success) {
+        // fallback: close and let router refresh handle it
         reset()
         onClose()
       } else {
@@ -176,7 +196,10 @@ function AddModal({
             style={{ background: 'var(--canvas)', border: '1px solid var(--hairline)' }}
           >
             {/* Modal header */}
-            <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid var(--hairline)' }}>
+            <div
+              className="flex items-center justify-between px-6 py-4"
+              style={{ borderBottom: '1px solid var(--hairline)' }}
+            >
               <h2 className="text-h4" style={{ color: 'var(--ink-deep)' }}>Add Application</h2>
               <button onClick={onClose} style={{ color: 'var(--steel)' }} className="hover:text-ink transition-colors">
                 <X size={18} />
@@ -189,12 +212,16 @@ function AddModal({
                 <div>
                   <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--ink)' }}>Company *</label>
                   <input style={inputStyle} placeholder="Arbisoft" {...register('company_name')} />
-                  {errors.company_name && <p className="text-xs mt-1" style={{ color: 'var(--brand-red)' }}>{errors.company_name.message}</p>}
+                  {errors.company_name && (
+                    <p className="text-xs mt-1" style={{ color: 'var(--brand-red)' }}>{errors.company_name.message}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--ink)' }}>Role *</label>
                   <input style={inputStyle} placeholder="SWE Intern" {...register('role_title')} />
-                  {errors.role_title && <p className="text-xs mt-1" style={{ color: 'var(--brand-red)' }}>{errors.role_title.message}</p>}
+                  {errors.role_title && (
+                    <p className="text-xs mt-1" style={{ color: 'var(--brand-red)' }}>{errors.role_title.message}</p>
+                  )}
                 </div>
               </div>
 
@@ -202,7 +229,9 @@ function AddModal({
                 <div>
                   <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--ink)' }}>Status</label>
                   <select style={inputStyle} {...register('status')}>
-                    {STATUSES.map(s => <option key={s} value={s}>{STATUS_CONFIG[s].label}</option>)}
+                    {STATUSES.map(s => (
+                      <option key={s} value={s}>{STATUS_CONFIG[s].label}</option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -224,13 +253,28 @@ function AddModal({
               {error && <p className="text-xs" style={{ color: 'var(--brand-red)' }}>{error}</p>}
 
               <div className="flex justify-end gap-2 pt-1">
-                <button type="button" onClick={onClose}
+                <button
+                  type="button"
+                  onClick={onClose}
                   className="px-4 py-2 text-sm font-medium rounded"
-                  style={{ border: '1px solid var(--hairline-strong)', color: 'var(--ink)', borderRadius: 'var(--radius-md)' }}
-                >Cancel</button>
-                <button type="submit" disabled={isPending}
+                  style={{
+                    border: '1px solid var(--hairline-strong)',
+                    color: 'var(--ink)',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isPending}
                   className="px-4 py-2 text-sm font-medium rounded"
-                  style={{ background: isPending ? 'var(--steel)' : 'var(--brand-red)', color: 'var(--on-dark)', borderRadius: 'var(--radius-md)', border: 'none' }}
+                  style={{
+                    background: isPending ? 'var(--steel)' : 'var(--brand-red)',
+                    color: 'var(--on-dark)',
+                    borderRadius: 'var(--radius-md)',
+                    border: 'none',
+                  }}
                 >
                   {isPending ? 'Adding…' : 'Add Application'}
                 </button>
@@ -251,17 +295,29 @@ interface Props {
 }
 
 export default function TrackerTable({ initialApplications, defaultCompany, defaultRole }: Props) {
+  const router = useRouter()
   const [apps, setApps] = useState(initialApplications)
   const [showAdd, setShowAdd] = useState(!!defaultCompany)
   const [filter, setFilter] = useState<ApplicationStatus | 'All'>('All')
   const [isPending, startTransition] = useTransition()
 
-  const refresh = () => window.location.reload()
+  // Status update — optimistic: update local state + background server refresh
+  const handleStatusUpdated = () => {
+    router.refresh()
+  }
 
+  // Add — instantly prepend to local list, no page reload needed
+  const handleAdded = (app: Application) => {
+    setApps(prev => [app, ...prev])
+    router.refresh() // keep server state in sync
+  }
+
+  // Delete — remove from local state immediately
   const handleDelete = (id: string) => {
+    setApps(prev => prev.filter(a => a.id !== id))
     startTransition(async () => {
       await deleteApplication(id)
-      setApps(prev => prev.filter(a => a.id !== id))
+      router.refresh()
     })
   }
 
@@ -277,6 +333,7 @@ export default function TrackerTable({ initialApplications, defaultCompany, defa
       <AddModal
         isOpen={showAdd}
         onClose={() => setShowAdd(false)}
+        onAdded={handleAdded}
         defaultCompany={defaultCompany}
         defaultRole={defaultRole}
       />
@@ -331,12 +388,12 @@ export default function TrackerTable({ initialApplications, defaultCompany, defa
           <p className="text-xs">Click &ldquo;Add Application&rdquo; to start tracking</p>
         </div>
       ) : (
-        <div className="rounded-lg overflow-hidden" style={{ border: '1px solid var(--hairline)' }}>
+        <div className="rounded-lg overflow-visible" style={{ border: '1px solid var(--hairline)' }}>
           {/* Table header */}
           <div
-            className="grid text-xs font-semibold uppercase tracking-wide px-4 py-2.5"
+            className="grid text-xs font-semibold uppercase tracking-wide px-4 py-2.5 rounded-t-lg"
             style={{
-              gridTemplateColumns: '1fr 1fr 130px 100px 36px',
+              gridTemplateColumns: '1fr 1fr 140px 100px 36px',
               background: 'var(--surface)',
               borderBottom: '1px solid var(--hairline)',
               color: 'var(--steel)',
@@ -359,9 +416,10 @@ export default function TrackerTable({ initialApplications, defaultCompany, defa
                 exit={{ opacity: 0, x: -8 }}
                 className="grid items-center px-4 py-3 group"
                 style={{
-                  gridTemplateColumns: '1fr 1fr 130px 100px 36px',
+                  gridTemplateColumns: '1fr 1fr 140px 100px 36px',
                   borderBottom: i < filtered.length - 1 ? '1px solid var(--hairline)' : 'none',
                   background: 'var(--canvas)',
+                  overflow: 'visible',
                 }}
               >
                 <span className="text-sm font-medium truncate pr-2" style={{ color: 'var(--ink-deep)' }}>
@@ -373,8 +431,8 @@ export default function TrackerTable({ initialApplications, defaultCompany, defa
                     <p className="text-xs truncate mt-0.5" style={{ color: 'var(--stone)' }}>{app.notes}</p>
                   )}
                 </div>
-                <div>
-                  <StatusSelect id={app.id} current={app.status} onUpdate={refresh} />
+                <div style={{ overflow: 'visible' }}>
+                  <StatusSelect id={app.id} current={app.status} onUpdate={handleStatusUpdated} />
                 </div>
                 <span className="text-xs" style={{ color: 'var(--stone)' }}>
                   {app.applied_date
