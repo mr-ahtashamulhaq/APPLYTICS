@@ -89,26 +89,43 @@ export async function saveProfile(data: ProfileFormData): Promise<{ success: boo
       .update({ name: data.full_name, updated_at: new Date().toISOString() })
       .eq('id', user.id)
 
-    // Upsert profile
-    const { error: profileError } = await supabaseAdmin
+    // Check if profile row already exists
+    const { data: existing } = await supabaseAdmin
       .from('profiles')
-      .upsert(
-        {
-          user_id: user.id,
-          phone: data.phone || null,
-          city: data.city || null,
-          linkedin_url: data.linkedin_url || null,
-          portfolio_url: data.portfolio_url || null,
-          university: data.university || null,
-          degree: data.degree || null,
-          graduation_status: data.graduation_status || null,
-          skills: data.skills.length > 0 ? data.skills : null,
-          experience_text: data.experience_text || null,
-          projects_text: data.projects_text || null,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: 'user_id' }
-      )
+      .select('id')
+      .eq('user_id', user.id)
+      .single()
+
+    const profilePayload = {
+      user_id: user.id,
+      phone: data.phone || null,
+      city: data.city || null,
+      linkedin_url: data.linkedin_url || null,
+      portfolio_url: data.portfolio_url || null,
+      university: data.university || null,
+      degree: data.degree || null,
+      graduation_status: data.graduation_status || null,
+      skills: data.skills.length > 0 ? data.skills : null,
+      experience_text: data.experience_text || null,
+      projects_text: data.projects_text || null,
+      updated_at: new Date().toISOString(),
+    }
+
+    let profileError
+    if (existing) {
+      // Row exists — UPDATE
+      const { error } = await supabaseAdmin
+        .from('profiles')
+        .update(profilePayload)
+        .eq('user_id', user.id)
+      profileError = error
+    } else {
+      // No row yet — INSERT
+      const { error } = await supabaseAdmin
+        .from('profiles')
+        .insert({ ...profilePayload, created_at: new Date().toISOString() })
+      profileError = error
+    }
 
     if (profileError) {
       console.error('[saveProfile] error:', profileError)
