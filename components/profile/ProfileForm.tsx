@@ -269,7 +269,7 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
             <Label htmlFor="university">University / Institution</Label>
             <Input
               id="university"
-              placeholder="LUMS — Lahore University of Management Sciences"
+              placeholder="UOL - The University Of Lahore"
               {...register('university')}
             />
           </div>
