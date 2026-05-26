@@ -1,7 +1,8 @@
 import { SignIn } from '@clerk/nextjs'
+import Image from 'next/image'
 
 export const metadata = {
-  title: 'Sign In — Applytics',
+  title: 'Applytics',
   description: 'Sign in to your Applytics account.',
 }
 
@@ -22,14 +23,7 @@ export default function SignInPage() {
       >
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <rect width="28" height="28" rx="6" fill="var(--brand-red)" />
-            <path
-              d="M14 6L20 22H17.5L16 18H12L10.5 22H8L14 6ZM14 10.5L12.7 14.5H15.3L14 10.5Z"
-              fill="white"
-            />
-          </svg>
-          <span className="font-semibold text-sm tracking-tight text-white">Applytics</span>
+          <Image src="/chrome-shiny-wordmark.png" alt="Applytics" width={100} height={32} className="object-contain" />
         </div>
 
         {/* Tagline */}
@@ -56,14 +50,7 @@ export default function SignInPage() {
         <div className="w-full max-w-sm">
           <div className="mb-6 lg:hidden">
             <div className="flex items-center gap-2 mb-4">
-              <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <rect width="28" height="28" rx="6" fill="var(--brand-red)" />
-                <path
-                  d="M14 6L20 22H17.5L16 18H12L10.5 22H8L14 6ZM14 10.5L12.7 14.5H15.3L14 10.5Z"
-                  fill="white"
-                />
-              </svg>
-              <span className="font-semibold text-sm" style={{ color: 'var(--ink-deep)' }}>Applytics</span>
+              <Image src="/chrome-shiny-wordmark.png" alt="Applytics" width={100} height={32} className="object-contain" />
             </div>
           </div>
 

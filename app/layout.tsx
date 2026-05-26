@@ -14,14 +14,25 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Applytics — AI Resume Tailoring for Pakistani Job Seekers',
+  title: 'Applytics',
   description:
     'Paste a job description, get a tailored ATS-friendly resume in seconds. Built for students and fresh graduates in Pakistan.',
   keywords: ['resume', 'ATS', 'job application', 'Pakistan', 'CV', 'career'],
+  icons: {
+    icon: '/chrome-shiny-wordmark.png',
+  },
   openGraph: {
-    title: 'Applytics — AI Resume Tailoring',
+    title: 'Applytics',
     description: 'Tailored resumes for every job. Built for Pakistani students and graduates.',
+    url: 'https://applytics.co',
+    siteName: 'Applytics',
+    locale: 'en_PK',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Applytics',
+    description: 'Tailored resumes for every job.',
   },
 }
 

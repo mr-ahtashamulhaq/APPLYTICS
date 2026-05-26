@@ -188,7 +188,7 @@ export default function Hero() {
               className="text-base lg:text-lg mb-8 max-w-[520px]"
               style={{ color: 'var(--charcoal)', lineHeight: 1.65 }}
             >
-              Paste any job description. Our AI tailors your resume to match it — ATS-safe, keyword-optimized, ready to download. Built for Pakistan&apos;s students and fresh graduates.
+              Paste any job description. Our AI tailors your resume to match it - ATS-safe, keyword-optimized, ready to download. Built for Pakistan&apos;s students and fresh graduates.
             </motion.p>
 
             {/* CTAs */}
@@ -244,16 +244,6 @@ export default function Hero() {
                 transform: 'scale(1.1)',
               }}
             />
-            {/* Chrome 3D logo watermark above card */}
-            <div className="absolute -top-10 -right-6 w-20 h-20 opacity-70">
-              <Image
-                src="/wordmark.png"
-                alt=""
-                width={80}
-                height={80}
-                className="w-full h-full object-contain"
-              />
-            </div>
             <ProductMockup />
           </motion.div>
 

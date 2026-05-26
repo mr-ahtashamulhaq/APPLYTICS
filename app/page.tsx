@@ -11,11 +11,11 @@ import Footer from '@/components/landing/Footer'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Applytics — Resume Intelligence for Pakistan\'s Job Seekers',
+  title: 'Applytics',
   description: 'Paste a job description, get a tailored ATS-safe resume in seconds. Built for students and fresh graduates in Pakistan.',
   keywords: ['resume', 'ATS', 'job application', 'Pakistan', 'CV', 'career', 'AI resume'],
   openGraph: {
-    title: 'Applytics — AI Resume Tailoring',
+    title: 'Applytics - AI Resume Tailoring',
     description: 'Turning applications into interviews for Pakistan\'s job seekers.',
     type: 'website',
   },

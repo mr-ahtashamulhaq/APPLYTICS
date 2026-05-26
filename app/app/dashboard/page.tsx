@@ -3,7 +3,7 @@ import { loadDashboard } from '@/lib/actions/dashboard'
 import type { DashboardData } from '@/lib/actions/dashboard'
 
 export const metadata = {
-  title: 'Dashboard — Applytics',
+  title: 'Applytics',
   description: 'Overview of your resume activity and job applications.',
 }
 

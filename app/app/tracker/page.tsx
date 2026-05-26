@@ -2,8 +2,8 @@ import { loadApplications } from '@/lib/actions/tracker'
 import TrackerTable from '@/components/tracker/TrackerTable'
 
 export const metadata = {
-  title: 'Application Tracker — Applytics',
-  description: 'Track every job application — status, dates, and notes in one place.',
+  title: 'Applytics',
+  description: 'Track every job application - status, dates, and notes in one place.',
 }
 
 interface Props {

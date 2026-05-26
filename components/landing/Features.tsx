@@ -11,7 +11,7 @@ const FEATURES = [
   {
     tag: 'ATS Intelligence',
     title: 'Resumes that actually get read',
-    body: 'Most resumes are filtered out before a human sees them. Applytics rewrites your resume to match the exact language of the job description — keywords recruiters are scanning for, in the format ATS systems understand.',
+    body: 'Most resumes are filtered out before a human sees them. Applytics rewrites your resume to match the exact language of the job description - keywords recruiters are scanning for, in the format ATS systems understand.',
     Icon: Target,
     visual: 'ats',
   },

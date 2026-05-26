@@ -1,7 +1,7 @@
 import GenerateForm from '@/components/generate/GenerateForm'
 
 export const metadata = {
-  title: 'Generate Resume — Applytics',
+  title: 'Applytics',
   description: 'Paste a job description and get an AI-tailored, ATS-optimised resume in seconds.',
 }
 

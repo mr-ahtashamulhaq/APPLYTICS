@@ -2,7 +2,7 @@ import { loadProfile } from '@/lib/actions/profile'
 import ProfileForm from '@/components/profile/ProfileForm'
 
 export const metadata = {
-  title: 'Profile — Applytics',
+  title: 'Applytics',
   description: 'Manage your professional profile, skills, and experience.',
 }
 

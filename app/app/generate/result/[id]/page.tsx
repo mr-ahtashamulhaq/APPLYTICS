@@ -8,7 +8,7 @@ import ResumePreview from '@/components/generate/ResumePreview'
 import DownloadPDFButton from '@/components/generate/DownloadPDFButton'
 
 export const metadata = {
-  title: 'Resume Result — Applytics',
+  title: 'Applytics',
 }
 
 interface Props {
