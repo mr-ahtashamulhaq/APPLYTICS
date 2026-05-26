@@ -33,7 +33,7 @@ export default function DownloadPDFButton({ resumeId, filename }: Props) {
       setTimeout(() => setState('idle'), 3000)
     } catch {
       setState('idle')
-      alert('PDF generation failed — please try again.')
+      alert('PDF generation failed! please try again.')
     }
   }
 

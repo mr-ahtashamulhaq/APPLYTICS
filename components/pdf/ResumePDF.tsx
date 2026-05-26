@@ -203,7 +203,7 @@ export default function ResumePDF({ ai, jobTitle, company, profile }: Props) {
 
   return (
     <Document
-      title={`${profile.full_name} — ${jobTitle} at ${company}`}
+      title={`${profile.full_name} - ${jobTitle} at ${company}`}
       author={profile.full_name}
       creator="Applytics"
       producer="Applytics"

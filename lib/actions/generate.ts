@@ -44,7 +44,7 @@ export interface GenerateResult {
 function buildPrompt(profile: Record<string, unknown>, input: GenerateInput): string {
   return `You are an expert resume writer and ATS specialist. Your task is to tailor a candidate's profile to a specific job description.
 
-STRICT RULES — NEVER VIOLATE:
+STRICT RULES - NEVER VIOLATE:
 - Do NOT invent any numbers, metrics, or percentages that are not in the original profile
 - Do NOT invent companies, employers, or clients
 - Do NOT invent tools, technologies, or programming languages

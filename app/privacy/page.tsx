@@ -67,10 +67,10 @@ export default function PrivacyPage() {
             <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--ink-deep)' }}>4. Third-party services</h2>
             <p className="mb-3">Applytics uses the following third-party services:</p>
             <ul className="flex flex-col gap-2" style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-              <li><strong>Clerk</strong> — authentication and identity management.</li>
-              <li><strong>Supabase</strong> — data storage (hosted on AWS EU region).</li>
-              <li><strong>Groq</strong> — AI inference for resume tailoring.</li>
-              <li><strong>Vercel</strong> — hosting and deployment infrastructure.</li>
+              <li><strong>Clerk</strong> - authentication and identity management.</li>
+              <li><strong>Supabase</strong> - data storage (hosted on AWS EU region).</li>
+              <li><strong>Groq</strong> - AI inference for resume tailoring.</li>
+              <li><strong>Vercel</strong> - hosting and deployment infrastructure.</li>
             </ul>
             <p className="mt-3">Each of these services has its own privacy policy governing their use of your data.</p>
           </section>

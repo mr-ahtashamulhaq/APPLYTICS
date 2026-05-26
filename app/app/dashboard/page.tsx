@@ -152,7 +152,7 @@ export default async function DashboardPage() {
         <StatCard label="Interviews" value={stats.interviews} />
         <StatCard
           label="Avg. Match Score"
-          value={stats.avgMatchScore !== null ? `${stats.avgMatchScore}%` : '—'}
+          value={stats.avgMatchScore !== null ? `${stats.avgMatchScore}%` : '-'}
           sub={stats.avgMatchScore !== null ? 'across all resumes' : 'generate a resume first'}
         />
       </div>

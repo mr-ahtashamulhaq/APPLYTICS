@@ -12,7 +12,7 @@ export default function GeneratePage() {
         <p className="text-label mb-1">AI Resume Generator</p>
         <h1 className="text-h1" style={{ color: 'var(--ink-deep)' }}>Generate Resume</h1>
         <p className="mt-2 text-sm" style={{ color: 'var(--steel)', maxWidth: '52ch' }}>
-          Paste any job description. Applytics tailors your profile to match — rewriting bullets, surfacing keywords, and scoring your fit.
+          Paste any job description. Applytics tailors your profile to match - rewriting bullets, surfacing keywords, and scoring your fit.
         </p>
       </div>
 

@@ -226,7 +226,7 @@ export default function GenerateForm() {
 
             <div className="md:col-span-2">
               <Label htmlFor="required_skills">
-                Required Skills <span style={{ color: 'var(--stone)', fontWeight: 400 }}>(optional — paste from JD)</span>
+                Required Skills <span style={{ color: 'var(--stone)', fontWeight: 400 }}>(optional - paste from JD)</span>
               </Label>
               <InputField
                 id="required_skills"

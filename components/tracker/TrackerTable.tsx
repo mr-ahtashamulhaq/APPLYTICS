@@ -449,7 +449,7 @@ export default function TrackerTable({ initialApplications, defaultCompany, defa
                 <span className="text-xs" style={{ color: 'var(--stone)' }}>
                   {app.applied_date
                     ? new Date(app.applied_date).toLocaleDateString('en-PK', { day: 'numeric', month: 'short' })
-                    : '—'}
+                    : '-'}
                 </span>
                 <button
                   onClick={() => handleDelete(app.id)}

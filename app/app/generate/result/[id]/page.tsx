@@ -49,7 +49,7 @@ export default async function ResultPage({ params }: Props) {
       <div className="mb-8">
         <p className="text-label mb-1">Resume Generated</p>
         <h1 className="text-h1" style={{ color: 'var(--ink-deep)' }}>
-          {jobTitle} — {companyName}
+          {jobTitle} - {companyName}
         </h1>
         <p className="mt-1 text-sm" style={{ color: 'var(--steel)' }}>
           Generated {new Date(resume.created_at).toLocaleDateString('en-PK', { dateStyle: 'medium' })}
