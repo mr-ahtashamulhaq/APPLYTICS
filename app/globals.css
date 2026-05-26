@@ -309,4 +309,20 @@
   /* Row hover — use on server-component rows instead of onMouseEnter */
   .row-hover { transition: background 120ms ease; }
   .row-hover:hover { background: var(--surface) !important; }
+
+  /* Landing page input focus */
+  .landing-input:focus {
+    border-color: var(--brand-red) !important;
+    outline: none;
+    box-shadow: 0 0 0 2px var(--brand-red-subtle);
+  }
+
+  /* Footer link hover — server-component safe (no JS event handlers) */
+  .footer-link {
+    color: var(--slate);
+    transition: color 150ms ease;
+  }
+  .footer-link:hover {
+    color: var(--ink);
+  }
 }

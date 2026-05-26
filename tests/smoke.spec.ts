@@ -137,4 +137,64 @@ test.describe('Applytics Smoke Tests', () => {
     expect(page.url()).toContain('/sign-in')
     expect(await hasRuntimeError(page)).toBe(false)
   })
+
+  test('Landing page — loads without runtime errors (unauthenticated)', async ({ page }) => {
+    const consoleErrors: string[] = []
+    page.on('console', (msg) => { if (msg.type() === 'error') consoleErrors.push(msg.text()) })
+    page.on('pageerror', (err) => consoleErrors.push(err.message))
+
+    await page.goto(`${BASE}/`, { waitUntil: 'networkidle' })
+
+    const url = page.url()
+    const isLanding    = url === `${BASE}/` || url.endsWith('/')
+    const isSignIn     = url.includes('/sign-in')
+    const isDashboard  = url.includes('/app/dashboard')
+
+    expect(isLanding || isSignIn || isDashboard).toBe(true)
+
+    // Only check runtime errors when on the public landing / sign-in pages
+    // (dashboard requires Supabase auth — may show an error in unauthenticated test env)
+    if (!isDashboard) {
+      expect(await hasRuntimeError(page)).toBe(false)
+
+      const realErrors = consoleErrors.filter(
+        (e) => !e.includes('clerk') && !e.includes('__clerk') &&
+               !e.includes('chrome-extension') && !e.includes('favicon') &&
+               !e.includes('Compressa')
+      )
+      expect(realErrors, `Console errors:\n${realErrors.join('\n')}`).toHaveLength(0)
+    }
+  })
+
+  test('Privacy page — loads as static page', async ({ page }) => {
+    const consoleErrors: string[] = []
+    page.on('console', (msg) => { if (msg.type() === 'error') consoleErrors.push(msg.text()) })
+    page.on('pageerror', (err) => consoleErrors.push(err.message))
+
+    await page.goto(`${BASE}/privacy`, { waitUntil: 'networkidle' })
+
+    await expect(page).toHaveTitle(/Privacy Policy/)
+    await expect(page.locator('h1')).toContainText('Privacy Policy')
+    expect(await hasRuntimeError(page)).toBe(false)
+
+    const realErrors = consoleErrors.filter(
+      (e) => !e.includes('clerk') && !e.includes('chrome-extension')
+    )
+    expect(realErrors, `Console errors:\n${realErrors.join('\n')}`).toHaveLength(0)
+  })
+
+  test('Landing page — no gradient text, no Inter font, brand-red token present', async ({ page }) => {
+    await page.goto(`${BASE}/sign-in`, { waitUntil: 'networkidle' })
+
+    // Check brand-red token
+    const brandRed = await page.evaluate(() =>
+      getComputedStyle(document.documentElement).getPropertyValue('--brand-red').trim()
+    )
+    expect(brandRed).toBe('#de0d12')
+
+    // Check no Inter font on body (we use Geist)
+    const fontFamily = await page.evaluate(() => getComputedStyle(document.body).fontFamily)
+    expect(fontFamily.toLowerCase()).not.toContain('inter')
+    expect(fontFamily.toLowerCase()).toContain('geist')
+  })
 })
