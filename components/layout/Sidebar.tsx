@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { UserButton } from '@clerk/nextjs'
 import { motion } from 'framer-motion'
@@ -68,20 +69,7 @@ export default function Sidebar() {
       >
         {/* Wordmark */}
         <Link href="/" className="flex items-center gap-2 group">
-          {/* Inline SVG logomark — simplified A shape in brand red */}
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 28 28"
-            fill="none"
-            aria-hidden="true"
-          >
-            <rect width="28" height="28" rx="6" fill="var(--brand-red)" />
-            <path
-              d="M14 6L20 22H17.5L16 18H12L10.5 22H8L14 6ZM14 10.5L12.7 14.5H15.3L14 10.5Z"
-              fill="white"
-            />
-          </svg>
+          <Image src="/wordmark.png" alt="Applytics Logo" width={32} height={32} className="object-contain" />
           <span
             className="text-h4 tracking-tight select-none"
             style={{ color: 'var(--ink-deep)', letterSpacing: '-0.5px' }}
