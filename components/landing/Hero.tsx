@@ -188,7 +188,7 @@ export default function Hero() {
               className="text-base lg:text-lg mb-8 max-w-[520px]"
               style={{ color: 'var(--charcoal)', lineHeight: 1.65 }}
             >
-              Paste any job description. Our AI tailors your resume to match it - ATS-safe, keyword-optimized, ready to download. Built for Pakistan&apos;s students and fresh graduates.
+              Paste any job description. Our AI tailors your resume to match it. Keyword optimized, ATS friendly, Ready to download. Built for Pakistan&apos;s students and fresh graduates.
             </motion.p>
 
             {/* CTAs */}
