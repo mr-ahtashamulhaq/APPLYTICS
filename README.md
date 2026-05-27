@@ -276,27 +276,9 @@ See `DESIGN.md` for the complete design specification.
 
 ---
 
-## 📊 Development Status
-
-| Phase | Status |
-|-------|--------|
-| Phase 1: Project Setup & Infrastructure | ✅ Complete |
-| Phase 2: Authentication & App Shell | ✅ Complete |
-| Phase 3: Profile Setup | ✅ Complete |
-| Phase 4: Job Description Input & AI Pipeline | ✅ Complete |
-| Phase 5: Result Page, PDF & Match Score | ✅ Complete |
-| Phase 6+7: PDF Generation | ✅ Complete |
-| Phase 8: Application Tracker | ✅ Complete |
-| Phase 9: Dashboard | ✅ Complete |
-| Phase 10: Landing Page | ✅ Complete |
-| Phase 11: Polish, Error States & Loading UX | ✅ Complete |
-| Phase 12: Testing & Vercel Deploy | 🔄 In Progress |
-
----
-
 ## 🤝 Contributing
 
-This is a final-year project / startup MVP. Contributions, bug reports, and feature suggestions are welcome.
+This is a Entrepreneurship Subject project / startup MVP. Contributions, bug reports, and feature suggestions are welcome.
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
