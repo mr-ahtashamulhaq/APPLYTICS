@@ -13,6 +13,7 @@ import {
   deleteApplication,
 } from '@/lib/actions/tracker'
 import type { Application, ApplicationStatus } from '@/lib/types/database'
+import { toast } from 'sonner'
 
 // ── Status config ────────────────────────────────────────────────
 const STATUS_CONFIG: Record<ApplicationStatus, { label: string; color: string; bg: string }> = {
@@ -54,7 +55,12 @@ function StatusSelect({
     setOpen(false)
     onStatusChange(id, status)          // ← instant optimistic update
     startTransition(async () => {
-      await updateApplicationStatus(id, status)
+      const res = await updateApplicationStatus(id, status)
+      if (res.success) {
+        toast.success(`Status updated to ${status}`)
+      } else {
+        toast.error(res.error ?? 'Failed to update status')
+      }
       onUpdate()                        // ← background server sync
     })
   }
@@ -157,14 +163,16 @@ function AddModal({
       const res = await addApplication(data)
       if (res.success && res.application) {
         reset()
+        toast.success('Application added')
         onAdded(res.application)
         onClose()
       } else if (res.success) {
-        // fallback: close and let router refresh handle it
+        toast.success('Application added')
         reset()
         onClose()
       } else {
         setError(res.error ?? 'Failed to add')
+        toast.error(res.error ?? 'Failed to add application')
       }
     })
   }
@@ -323,7 +331,12 @@ export default function TrackerTable({ initialApplications, defaultCompany, defa
   const handleDelete = (id: string) => {
     setApps(prev => prev.filter(a => a.id !== id))
     startTransition(async () => {
-      await deleteApplication(id)
+      const res = await deleteApplication(id)
+      if (res.success) {
+        toast.success('Application removed')
+      } else {
+        toast.error(res.error ?? 'Failed to delete')
+      }
       router.refresh()
     })
   }

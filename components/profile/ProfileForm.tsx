@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle, WarningCircle, FloppyDisk } from '@phosphor-icons/react'
 import SkillsInput from './SkillsInput'
 import { saveProfile, type ProfileFormData } from '@/lib/actions/profile'
+import { toast } from 'sonner'
 
 // ── Zod schema ──────────────────────────────────────────────────
 const profileSchema = z.object({
@@ -187,10 +188,12 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
 
     if (result.success) {
       setSaveStatus('success')
+      toast.success('Profile saved')
       setTimeout(() => setSaveStatus('idle'), 3000)
     } else {
       setSaveStatus('error')
       setSaveError(result.error ?? 'Failed to save')
+      toast.error(result.error ?? 'Failed to save profile')
     }
   }
 
@@ -338,7 +341,7 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
           {...register('experience_text')}
         />
         <p className="mt-2 text-xs" style={{ color: 'var(--stone)' }}>
-          Write naturally — our AI will structure this for each job application.
+          Write naturally - our AI will structure this for each job application.
         </p>
       </Section>
 

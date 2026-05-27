@@ -57,12 +57,12 @@ export default function MissionBand() {
           </div>
 
           {/* Tagline */}
-          <p
+          {/* <p
             className="text-xs font-semibold uppercase tracking-widest mb-6"
             style={{ color: 'var(--brand-red)', fontFamily: 'var(--font-geist-mono)' }}
           >
             Our tagline
-          </p>
+          </p> */}
           <blockquote
             className="text-2xl lg:text-3xl font-light mb-12"
             style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.5, letterSpacing: '-0.25px' }}

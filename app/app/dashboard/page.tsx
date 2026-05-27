@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { loadDashboard } from '@/lib/actions/dashboard'
 import type { DashboardData } from '@/lib/actions/dashboard'
 
@@ -119,13 +120,7 @@ function IncompleteProfileBanner() {
 export default async function DashboardPage() {
   const data = await loadDashboard()
 
-  if (!data) {
-    return (
-      <div className="max-w-4xl mx-auto w-full">
-        <p className="text-sm" style={{ color: 'var(--steel)' }}>Loading…</p>
-      </div>
-    )
-  }
+  if (!data) redirect('/sign-in')
 
   const { stats, recentResumes, recentApplications, profileComplete, userName } = data
 

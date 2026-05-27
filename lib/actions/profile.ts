@@ -28,7 +28,12 @@ export async function loadProfile(): Promise<ProfileFormData | null> {
   const { userId } = await auth()
   if (!userId) return null
 
-  const clerkUser = await currentUser()
+  let clerkUser = null
+  try {
+    clerkUser = await currentUser()
+  } catch {
+    return null
+  }
 
   // Ensure user row exists in Supabase
   await ensureUser(
