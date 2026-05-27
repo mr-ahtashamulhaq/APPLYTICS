@@ -14,6 +14,11 @@
 [![Groq](https://img.shields.io/badge/AI-Groq-orange)](https://groq.com)
 [![Vercel](https://img.shields.io/badge/Deploy-Vercel-black)](https://vercel.com)
 
+<br/>
+
+[![Visit Live App](https://img.shields.io/badge/Live_Site-Applytics.online-de0d12?style=for-the-badge)](https://www.applytics.online)
+
+
 </div>
 
 ---
