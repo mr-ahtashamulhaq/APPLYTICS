@@ -129,8 +129,8 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full overflow-hidden flex flex-col justify-center"
-      style={{ paddingTop: '120px', paddingBottom: '40px', background: 'var(--canvas)' }}
+      className="relative min-h-[100dvh] w-full overflow-hidden flex flex-col justify-center"
+      style={{ paddingTop: '64px', background: 'var(--canvas)' }}
     >
       {/* Grid background */}
       <BGPattern variant="grid" mask="fade-edges" size={36} fill="#e5e3df" />
