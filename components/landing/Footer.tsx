@@ -3,14 +3,16 @@ import Image from 'next/image'
 
 const FOOTER_LINKS = {
   Product: [
-    { label: 'How it works', href: '/#how-it-works' },
-    { label: 'Features', href: '/#features' },
-    { label: 'Pricing', href: '/#pricing' },
+    { label: 'The Problem', href: '/#problem' },
+    { label: 'Platform',    href: '/#platform' },
+    { label: 'Features',    href: '/#features' },
+    { label: 'Pricing',     href: '/#pricing' },
+    { label: 'Research',    href: '/research' },
   ],
   Company: [
     { label: 'About', href: '/#mission' },
     { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Contact', href: 'mailto:hello@applytics.pk' },
+    { label: 'Contact', href: 'mailto:hello@applytics.online' },
   ],
   Account: [
     { label: 'Sign in', href: '/sign-in' },
@@ -40,7 +42,7 @@ export default function Footer() {
               className="h-7 w-auto object-contain mb-4"
             />
             <p className="text-sm max-w-[240px]" style={{ color: 'var(--slate)', lineHeight: 1.65 }}>
-              Resume intelligence for Pakistan&apos;s job seekers. Tailored, ATS-safe, fast.
+              Career operating system for Pakistan&apos;s students and fresh graduates.
             </p>
             <p className="mt-4 text-xs" style={{ color: 'var(--stone)', fontFamily: 'var(--font-geist-mono)' }}>
               Lahore, Pakistan
