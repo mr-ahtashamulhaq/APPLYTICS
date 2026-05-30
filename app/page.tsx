@@ -2,22 +2,36 @@ import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import Navbar from '@/components/landing/Navbar'
 import Hero from '@/components/landing/Hero'
-import HowItWorks from '@/components/landing/HowItWorks'
+import ProblemSection from '@/components/landing/ProblemSection'
+import PlatformOverview from '@/components/landing/PlatformOverview'
 import Features from '@/components/landing/Features'
+import VisionSection from '@/components/landing/VisionSection'
+import WhoItsFor from '@/components/landing/WhoItsFor'
 import PricingSection from '@/components/landing/PricingSection'
 import MissionBand from '@/components/landing/MissionBand'
-import SuggestionForm from '@/components/landing/SuggestionForm'
+import FinalCTA from '@/components/landing/FinalCTA'
 import Footer from '@/components/landing/Footer'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Applytics',
-  description: 'Paste a job description, get a tailored ATS-safe resume in seconds. Built for students and fresh graduates in Pakistan.',
-  keywords: ['resume', 'ATS', 'job application', 'Pakistan', 'CV', 'career', 'AI resume'],
+  title: 'Applytics — Career Operating System for Pakistan',
+  description:
+    'The complete career platform for students and fresh graduates in Pakistan. AI resume tailoring, application tracking, job discovery, and career intelligence — all in one place.',
+  keywords: [
+    'resume', 'ATS', 'job application', 'Pakistan', 'CV', 'career',
+    'AI resume', 'job search', 'internship', 'fresh graduate', 'career platform',
+  ],
   openGraph: {
-    title: 'Applytics - AI Resume Tailoring',
+    title: 'Applytics — Career Operating System for Pakistan',
     description: 'Turning applications into interviews for Pakistan\'s job seekers.',
+    url: 'https://www.applytics.online',
+    siteName: 'Applytics',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Applytics — Career Operating System',
+    description: 'Turning applications into interviews for Pakistan\'s job seekers.',
   },
 }
 
@@ -32,11 +46,14 @@ export default async function RootPage() {
     <main className="min-h-[100dvh] flex flex-col" style={{ background: 'var(--canvas)' }}>
       <Navbar />
       <Hero />
-      <HowItWorks />
+      <ProblemSection />
+      <PlatformOverview />
       <Features />
+      <VisionSection />
+      <WhoItsFor />
       <PricingSection />
       <MissionBand />
-      <SuggestionForm />
+      <FinalCTA />
       <Footer />
     </main>
   )

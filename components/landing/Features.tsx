@@ -10,24 +10,27 @@ gsap.registerPlugin(ScrollTrigger)
 const FEATURES = [
   {
     tag: 'ATS Intelligence',
-    title: 'Resumes that actually get read',
-    body: 'Most resumes are filtered out before a human sees them. Applytics rewrites your resume to match the exact language of the job description - keywords recruiters are scanning for, in the format ATS systems understand.',
+    title: 'Resumes that actually get read.',
+    body: 'Most resumes are filtered out before a human ever sees them. Applytics rewrites your resume to match the exact language of the job description — keywords recruiters scan for, in the format ATS systems understand.',
     Icon: Target,
     visual: 'ats',
+    available: true,
   },
   {
     tag: 'Match Score',
-    title: 'Know your odds before you apply',
-    body: 'See a match score for every application. Understand exactly which keywords you matched, which you missed, and what to add to your profile for future roles.',
+    title: 'Know your odds before you apply.',
+    body: 'See a match score for every application. Understand exactly which keywords you matched, which you missed, and what to add to your profile to improve your chances on future roles.',
     Icon: ChartBar,
     visual: 'score',
+    available: true,
   },
   {
     tag: 'Application Tracker',
-    title: 'One place for every application',
-    body: 'Track every job you applied to. Update the status from Applied to Interview to Offer in a single click. Never lose track of where you stand.',
+    title: 'One place for every application.',
+    body: 'Track every job you applied to. Update status from Applied to Interview to Offer in a single click. Replace your spreadsheet and Notes app with a dashboard built for the job search.',
     Icon: Briefcase,
     visual: 'tracker',
+    available: true,
   },
 ]
 
@@ -153,7 +156,7 @@ export default function Features() {
         {/* Section label */}
         <div className="flex items-center gap-4 mb-16">
           <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--steel)', fontFamily: 'var(--font-geist-mono)', whiteSpace: 'nowrap' }}>
-            Features
+            Available Today
           </span>
           <div style={{ flex: 1, height: '1px', background: 'var(--hairline-strong)' }} />
         </div>
@@ -175,6 +178,18 @@ export default function Features() {
                     </div>
                     <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-red)', fontFamily: 'var(--font-geist-mono)' }}>
                       {f.tag}
+                    </span>
+                    <span
+                      className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5"
+                      style={{
+                        background: 'var(--brand-red-subtle)',
+                        color: 'var(--brand-red)',
+                        border: '1px solid #fcd4d4',
+                        borderRadius: 'var(--radius-xs)',
+                        fontFamily: 'var(--font-geist-mono)',
+                      }}
+                    >
+                      Live
                     </span>
                   </div>
                   <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: 'var(--ink-deep)', letterSpacing: '-0.5px', lineHeight: 1.2 }}>

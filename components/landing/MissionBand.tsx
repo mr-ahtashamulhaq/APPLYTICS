@@ -43,7 +43,7 @@ export default function MissionBand() {
       />
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-6">
-        <div className="mission-content max-w-[800px] mx-auto text-center">
+        <div className="mission-content max-w-[860px] mx-auto text-center">
 
           {/* Chrome logo */}
           <div className="flex justify-center mb-8">
@@ -56,41 +56,37 @@ export default function MissionBand() {
             />
           </div>
 
-          {/* Tagline */}
-          {/* <p
-            className="text-xs font-semibold uppercase tracking-widest mb-6"
-            style={{ color: 'var(--brand-red)', fontFamily: 'var(--font-geist-mono)' }}
-          >
-            Our tagline
-          </p> */}
+          {/* Tagline — exact words */}
           <blockquote
-            className="text-2xl lg:text-3xl font-light mb-12"
+            className="text-2xl lg:text-3xl font-light mb-14"
             style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.5, letterSpacing: '-0.25px' }}
           >
             We are not helping people apply to more jobs.
             <br />
-            We are helping them <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>get more responses.</span>
+            We are helping them{' '}
+            <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>get more responses.</span>
           </blockquote>
 
           {/* Divider */}
-          <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', marginBottom: '48px' }} />
+          <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', marginBottom: '56px' }} />
 
           {/* Mission + Vision two-col */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left mb-14">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--brand-red)', fontFamily: 'var(--font-geist-mono)' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--brand-red)', fontFamily: 'var(--font-geist-mono)' }}>
                 Mission
               </p>
-              <p className="text-base" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.65 }}>
+              <p className="text-base" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.7 }}>
                 Turning applications into interviews for Pakistan&apos;s job seekers.
               </p>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--brand-red)', fontFamily: 'var(--font-geist-mono)' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--brand-red)', fontFamily: 'var(--font-geist-mono)' }}>
                 Vision
               </p>
-              <p className="text-base" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.65 }}>
-                To become Pakistan&apos;s leading career support platform and help millions connect with meaningful opportunities over the next 10 years.
+              <p className="text-base" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.7 }}>
+                To become Pakistan&apos;s leading career support platform and help millions of people
+                connect with meaningful career opportunities over the next 10 years.
               </p>
             </div>
           </div>

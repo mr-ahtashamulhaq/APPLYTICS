@@ -38,9 +38,9 @@ const PLANS = [
       'Cover letter generator (soon)',
       'LinkedIn optimization (soon)',
     ],
-    cta: 'Coming soon',
-    ctaHref: '#',
-    disabled: true,
+    cta: 'Join waitlist',
+    ctaHref: 'mailto:hello@applytics.online?subject=Applytics Pro Waitlist',
+    disabled: false,
   },
   {
     id: 'campus',
@@ -58,7 +58,7 @@ const PLANS = [
       'API access',
     ],
     cta: 'Contact us',
-    ctaHref: 'mailto:hello@applytics.pk',
+    ctaHref: 'mailto:hello@applytics.online',
   },
 ]
 
@@ -184,7 +184,7 @@ export default function PricingSection() {
 
         {/* Footer note */}
         <p className="mt-6 text-center text-xs" style={{ color: 'var(--stone)', fontFamily: 'var(--font-geist-mono)' }}>
-          All plans include a 14-day free trial period. No credit card required to start.
+          All plans include ATS match score analysis and PDF export. No credit card required to start.
         </p>
       </div>
     </section>

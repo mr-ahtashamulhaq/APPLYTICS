@@ -8,9 +8,10 @@ import { List, X } from '@phosphor-icons/react'
 import { MetalButton } from '@/components/ui/liquid-glass-button'
 
 const NAV_LINKS = [
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'Features',     href: '#features' },
-  { label: 'Pricing',      href: '#pricing' },
+  { label: 'The Problem', href: '#problem' },
+  { label: 'Platform',    href: '#platform' },
+  { label: 'Features',    href: '#features' },
+  { label: 'Pricing',     href: '#pricing' },
 ]
 
 export default function Navbar() {

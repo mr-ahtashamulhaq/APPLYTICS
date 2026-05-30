@@ -116,7 +116,7 @@ function ProductMockup() {
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null)
 
-  const CYCLE_WORDS = ['interviews', 'callbacks', 'responses', 'offers', 'opportunities']
+  const CYCLE_WORDS = ['resumes', 'applications', 'interviews', 'callbacks', 'offers']
 
   const slideUp = {
     hidden: { opacity: 0, y: 16 },
@@ -147,7 +147,7 @@ export default function Hero() {
               className="text-xs font-semibold uppercase tracking-widest mb-6"
               style={{ color: 'var(--brand-red)', fontFamily: 'var(--font-geist-mono)' }}
             >
-              Resume Intelligence
+              Career Operating System
             </motion.p>
 
             {/* TextPressure headline */}
@@ -172,7 +172,7 @@ export default function Hero() {
               className="text-2xl lg:text-3xl font-light mb-6 relative"
               style={{ color: 'var(--ink)', lineHeight: 1.35, letterSpacing: '-0.5px' }}
             >
-              <span>Built to get more </span>
+              <span>Your job search is running on chaos. </span>
               <span style={{ color: 'var(--brand-red)', position: 'relative', display: 'inline-block' }}>
                 <AnimatedTextCycle
                   words={CYCLE_WORDS}
@@ -180,6 +180,7 @@ export default function Hero() {
                   className="text-2xl lg:text-3xl"
                 />
               </span>
+              <span> that actually get you hired.</span>
             </motion.div>
 
             {/* Body */}
@@ -188,7 +189,9 @@ export default function Hero() {
               className="text-base lg:text-lg mb-8 max-w-[520px]"
               style={{ color: 'var(--charcoal)', lineHeight: 1.65 }}
             >
-              Paste any job description. Our AI tailors your resume to match it. Keyword optimized, ATS friendly, Ready to download. Built for Pakistan&apos;s students and fresh graduates.
+              12 tabs open. Spreadsheets. The same resume going everywhere. No idea why
+              you&apos;re being rejected. Applytics is the single platform that manages your
+              entire job search &mdash; from finding the right opportunities to landing the offer.
             </motion.p>
 
             {/* CTAs */}
@@ -225,7 +228,7 @@ export default function Hero() {
               className="mt-5 text-xs"
               style={{ color: 'var(--stone)' }}
             >
-              No credit card required · Free to start · ATS-safe PDF export
+              No credit card required &middot; Free to start &middot; Built for Pakistan
             </motion.p>
           </div>
 
