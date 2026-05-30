@@ -18,7 +18,7 @@ const COMING_FEATURES = [
   {
     Icon: MagnifyingGlass,
     title: 'Job Discovery',
-    body: 'Aggregated opportunities from LinkedIn, Facebook, WhatsApp, job boards, and company websites — filtered by your profile and ranked by fit.',
+    body: 'Aggregated opportunities from LinkedIn, Facebook, WhatsApp, job boards, and company websites - filtered by your profile and ranked by fit.',
   },
   {
     Icon: EnvelopeSimple,
@@ -104,7 +104,7 @@ export default function VisionSection() {
               style={{ color: 'var(--charcoal)', lineHeight: 1.65, maxWidth: '520px' }}
             >
               Resume tailoring and application tracking are live today. Here is what the complete
-              Applytics platform is building toward — and why early users who join now
+              Applytics platform is building toward - and why early users who join now
               will benefit most.
             </p>
           </div>

@@ -336,7 +336,7 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
         <Label htmlFor="experience_text">Experience</Label>
         <Textarea
           id="experience_text"
-          placeholder={`Software Engineering Intern — Arbisoft (Jun 2024 – Aug 2024)\n• Built REST APIs using Node.js and Express\n• Reduced API response time by 30%\n\nFreelance Web Developer (2023 – Present)\n• Delivered 10+ client projects using React and Next.js`}
+          placeholder={`Software Engineering Intern - Arbisoft (Jun 2024 – Aug 2024)\n• Built REST APIs using Node.js and Express\n• Reduced API response time by 30%\n\nFreelance Web Developer (2023 – Present)\n• Delivered 10+ client projects using React and Next.js`}
           style={{ minHeight: '160px' }}
           {...register('experience_text')}
         />
@@ -353,7 +353,7 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
         <Label htmlFor="projects_text">Projects</Label>
         <Textarea
           id="projects_text"
-          placeholder={`Applytics (2024)\n• AI-powered resume tailoring platform built with Next.js, Supabase, and Groq\n• github.com/username/applytics\n\nPortfolio Website\n• Personal site built with React — 1,000+ monthly visitors`}
+          placeholder={`Applytics (2024)\n• AI-powered resume tailoring platform built with Next.js, Supabase, and Groq\n• github.com/username/applytics\n\nPortfolio Website\n• Personal site built with React - 1,000+ monthly visitors`}
           style={{ minHeight: '140px' }}
           {...register('projects_text')}
         />

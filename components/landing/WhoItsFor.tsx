@@ -11,21 +11,21 @@ const PERSONAS = [
     tag: 'Final-year student',
     headline: 'Applying for internships with a half-built resume.',
     scenario:
-      'You have some projects and one part-time job. Every internship posting asks for 2 years of experience. Applytics helps you surface what you actually have that matches each role — and closes the gap between what you built and what they want to see.',
+      'You have some projects and one part-time job. Every internship posting asks for 2 years of experience. Applytics helps you surface what you actually have that matches each role - and closes the gap between what you built and what they want to see.',
     detail: 'CS · Business · Engineering · All disciplines',
   },
   {
     tag: 'Fresh graduate',
     headline: 'Sending 50 applications. Getting 2 responses.',
     scenario:
-      'You graduated six months ago. You are applying to everything and hearing nothing back. The problem is not your resume — it is that the same resume is going to every job. Applytics fixes that by tailoring each application to the specific role in seconds.',
+      'You graduated six months ago. You are applying to everything and hearing nothing back. The problem is not your resume - it is that the same resume is going to every job. Applytics fixes that by tailoring each application to the specific role in seconds.',
     detail: 'BS/BBA · Fresh out of university',
   },
   {
     tag: 'Early-career professional',
     headline: 'Trying to level up but losing track of everything.',
     scenario:
-      'You have 1-2 years of experience and want a better role. You are juggling applications, interviews, follow-ups, and still doing your current job. Applytics becomes your command center — tracking every move and helping you apply smarter while you stay focused on the work.',
+      'You have 1-2 years of experience and want a better role. You are juggling applications, interviews, follow-ups, and still doing your current job. Applytics becomes your command center - tracking every move and helping you apply smarter while you stay focused on the work.',
     detail: '1-3 years experience · Career changers',
   },
 ]

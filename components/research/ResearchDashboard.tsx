@@ -61,11 +61,11 @@ const RESPONSE_DATA = [
 ]
 
 const USEFULNESS_RATINGS = [
-  { label: '1 — Not at all', value: 1, pct: 2 },
-  { label: '2 — Not useful', value: 2, pct: 4 },
-  { label: '3 — Neutral', value: 11, pct: 22 },
-  { label: '4 — Useful', value: 16, pct: 31 },
-  { label: '5 — Very useful', value: 21, pct: 41, primary: true },
+  { label: '1 - Not at all', value: 1, pct: 2 },
+  { label: '2 - Not useful', value: 2, pct: 4 },
+  { label: '3 - Neutral', value: 11, pct: 22 },
+  { label: '4 - Useful', value: 16, pct: 31 },
+  { label: '5 - Very useful', value: 21, pct: 41, primary: true },
 ]
 
 const LIKELIHOOD_DATA = [
@@ -116,7 +116,7 @@ const INSIGHTS = [
   {
     number: '02',
     headline: '45% of students track nothing.',
-    body: 'Nearly half of all respondents do not track their applications in any way — not even a Notes app. They are managing a critical life decision entirely from memory. This is the core problem the Applytics Tracker solves.',
+    body: 'Nearly half of all respondents do not track their applications in any way - not even a Notes app. They are managing a critical life decision entirely from memory. This is the core problem the Applytics Tracker solves.',
   },
   {
     number: '03',
@@ -126,7 +126,7 @@ const INSIGHTS = [
   {
     number: '04',
     headline: '86% are open to paying for premium features.',
-    body: '40% said yes and 46% said maybe when asked if they would pay for advanced features. Among those willing to pay, the most common price range is Rs 500–1,000 per month — a signal that the Pro plan is positioned correctly.',
+    body: '40% said yes and 46% said maybe when asked if they would pay for advanced features. Among those willing to pay, the most common price range is Rs 500-1,000 per month - a signal that the Pro plan is positioned correctly.',
   },
 ]
 
@@ -531,7 +531,7 @@ export default function ResearchDashboard() {
             <ChartCard
               title="Who We Surveyed"
               subtitle="Respondent status breakdown"
-              finding="85% of respondents are currently enrolled students — the primary target user for Applytics."
+              finding="85% of respondents are currently enrolled students - the primary target user for Applytics."
             >
               <DonutChart data={STATUS_DATA} />
             </ChartCard>
@@ -539,7 +539,7 @@ export default function ResearchDashboard() {
               <ChartCard
                 title="Field of Study"
                 subtitle="Academic background"
-                finding="65% are from CS/IT — but 35% come from other disciplines, confirming the platform must work beyond technical fields."
+                finding="65% are from CS/IT, but 35% come from other disciplines, confirming the platform must work beyond technical fields."
               >
                 {FIELD_DATA.map((d, i) => (
                   <HBarRow key={d.label} {...d} index={i} />
@@ -556,7 +556,7 @@ export default function ResearchDashboard() {
             <ChartCard
               title="Where Students Find Job Opportunities"
               subtitle="Primary platform used for job discovery"
-              finding="71% rely on LinkedIn alone — meaning most students are missing jobs posted on WhatsApp groups, Facebook communities, Rozee.pk, Indeed, and company career pages."
+              finding="71% rely on LinkedIn alone - meaning most students are missing jobs posted on WhatsApp groups, Facebook communities, Rozee.pk, Indeed, and company career pages."
             >
               {DISCOVERY_DATA.map((d, i) => (
                 <HBarRow key={d.label} {...d} index={i} />
@@ -583,7 +583,7 @@ export default function ResearchDashboard() {
             <ChartCard
               title="How Students Track Their Applications"
               subtitle="Current application tracking method"
-              finding="45% of students track nothing at all. 31% use a notes app. Only 16% use any kind of structured tracking like a spreadsheet. This is why they cannot improve their process — there is no data."
+              finding="45% of students track nothing at all. 31% use a notes app. Only 16% use any kind of structured tracking like a spreadsheet. This is why they cannot improve their process - there is no data."
             >
               {TRACKING_DATA.map((d, i) => (
                 <HBarRow key={d.label} {...d} index={i} />
@@ -593,7 +593,7 @@ export default function ResearchDashboard() {
               <ChartCard
                 title="How Often Students Receive Responses"
                 subtitle="Frequency of recruiter responses or interview calls"
-                finding="61% of students receive responses 'very rarely' — meaning the current approach of sending the same resume to every job is not working. This is the direct result of no tailoring and no strategy."
+                finding="61% of students receive responses 'very rarely' - meaning the current approach of sending the same resume to every job is not working. This is the direct result of no tailoring and no strategy."
               >
                 {RESPONSE_DATA.map((d, i) => (
                   <HBarRow key={d.label} {...d} maxPct={75} index={i} />
@@ -610,9 +610,9 @@ export default function ResearchDashboard() {
           {/* Usefulness rating — vertical bar chart */}
           <div style={{ border: '1px solid var(--hairline)' }} className="mb-0">
             <ChartCard
-              title="How Useful Would Applytics Be? (Rated 1–5)"
+              title="How Useful Would Applytics Be? (Rated 1-5)"
               subtitle="Students rated the platform concept before using it"
-              finding="71% of students rated the platform 4 or 5 out of 5 for usefulness — before a single line of code was written. This is the clearest signal of product-market fit."
+              finding="71% of students rated the platform 4 or 5 out of 5 for usefulness - before a single line of code was written. This is the clearest signal of product-market fit."
             >
               <div className="flex items-end gap-3 mt-2" style={{ height: '180px' }}>
                 {USEFULNESS_RATINGS.map((d, i) => (
@@ -634,7 +634,7 @@ export default function ResearchDashboard() {
             <ChartCard
               title="Likelihood to Try Applytics"
               subtitle="Self-reported intent"
-              finding="71% said 'Very Likely' — meaning strong pull demand before any marketing."
+              finding="71% said 'Very Likely' - meaning strong pull demand before any marketing."
             >
               {LIKELIHOOD_DATA.map((d, i) => (
                 <HBarRow key={d.label} {...d} maxPct={80} index={i} />
@@ -644,7 +644,7 @@ export default function ResearchDashboard() {
               <ChartCard
                 title="Most Valuable Feature"
                 subtitle="What students want most from the platform"
-                finding="Job recommendations (aggregated discovery) was the #1 most-wanted feature — validating the Discover pillar as the highest-impact next build."
+                finding="Job recommendations (aggregated discovery) was the #1 most-wanted feature - validating the Discover pillar as the highest-impact next build."
               >
                 {FEATURES_DATA.map((d, i) => (
                   <HBarRow key={d.label} {...d} maxPct={60} index={i} />
@@ -665,7 +665,7 @@ export default function ResearchDashboard() {
               <ChartCard
                 title="Would Pay for Advanced Features"
                 subtitle="Willingness to pay"
-                finding="86% said yes or maybe — strong signal for a freemium model."
+                finding="86% said yes or maybe - strong signal for a freemium model."
               >
                 <DonutChart data={PAY_DATA} />
               </ChartCard>
@@ -690,7 +690,7 @@ export default function ResearchDashboard() {
             <ChartCard
               title="Biggest Challenges When Applying for Jobs"
               subtitle="What students struggle with most"
-              finding="'Hard to find relevant jobs' is the #1 challenge — reported by 42% of students. This is the problem that Applytics Discover (coming soon) directly addresses."
+              finding="'Hard to find relevant jobs' is the #1 challenge - reported by 42% of students. This is the problem that Applytics Discover (coming soon) directly addresses."
             >
               {CHALLENGE_DATA.map((d, i) => (
                 <HBarRow key={d.label} {...d} maxPct={50} index={i} />

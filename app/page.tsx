@@ -14,15 +14,15 @@ import Footer from '@/components/landing/Footer'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Applytics — Career Operating System for Pakistan',
+  title: 'Applytics',
   description:
-    'The complete career platform for students and fresh graduates in Pakistan. AI resume tailoring, application tracking, job discovery, and career intelligence — all in one place.',
+    'The complete career platform for students and fresh graduates in Pakistan. AI resume tailoring, application tracking, job discovery, and career intelligence, all in one place.',
   keywords: [
     'resume', 'ATS', 'job application', 'Pakistan', 'CV', 'career',
     'AI resume', 'job search', 'internship', 'fresh graduate', 'career platform',
   ],
   openGraph: {
-    title: 'Applytics — Career Operating System for Pakistan',
+    title: 'Applytics',
     description: 'Turning applications into interviews for Pakistan\'s job seekers.',
     url: 'https://www.applytics.online',
     siteName: 'Applytics',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Applytics — Career Operating System',
+    title: 'Applytics',
     description: 'Turning applications into interviews for Pakistan\'s job seekers.',
   },
 }

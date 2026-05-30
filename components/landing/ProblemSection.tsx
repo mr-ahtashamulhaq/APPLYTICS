@@ -20,7 +20,7 @@ const PROBLEMS = [
   {
     number: '03',
     title: 'No visibility into what is working',
-    body: 'No analytics. No response rate data. No signal on why you were rejected. Most job seekers track applications in a Notes app — or not at all. Without data, nothing improves and nothing changes.',
+    body: 'No analytics. No response rate data. No signal on why you were rejected. Most job seekers track applications in a Notes app - or not at all. Without data, nothing improves and nothing changes.',
   },
 ]
 
@@ -75,7 +75,7 @@ export default function ProblemSection() {
       id="problem"
       ref={sectionRef}
       className="w-full"
-      style={{ background: 'var(--canvas)', padding: 'clamp(80px, 10vw, 128px) 0 0' }}
+      style={{ background: 'var(--canvas)', padding: 'clamp(80px, 10vw, 1px) 0 0' }}
     >
       <div className="max-w-[1280px] mx-auto px-6">
 

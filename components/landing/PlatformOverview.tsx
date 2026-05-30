@@ -13,7 +13,7 @@ const PILLARS = [
     Icon: MagnifyingGlass,
     title: 'Discover',
     headline: 'Every opportunity. One place.',
-    body: 'Jobs posted across LinkedIn, Facebook, WhatsApp, job portals, and university career pages — aggregated and ranked by relevance to your profile. No more tab-switching.',
+    body: 'Jobs posted across LinkedIn, Facebook, WhatsApp, job portals, and university career pages - aggregated and ranked by relevance to your profile. No more tab-switching.',
     status: 'coming-soon',
     statusLabel: 'Coming soon',
   },
@@ -22,7 +22,7 @@ const PILLARS = [
     Icon: FileText,
     title: 'Apply',
     headline: 'AI-tailored applications in seconds.',
-    body: 'Paste any job description. Get a resume tailored to match it — keywords optimized, experience reordered, ATS-safe PDF ready to download. One master profile. Infinite versions.',
+    body: 'Paste any job description. Get a resume tailored to match it | keywords optimized, experience reordered, ATS-safe PDF ready to download. One master profile. Infinite versions.',
     status: 'live',
     statusLabel: 'Available now',
   },
@@ -105,7 +105,7 @@ export default function PlatformOverview() {
               style={{ color: 'var(--charcoal)', lineHeight: 1.65 }}
             >
               Applytics is not another job tool. It is a career operating system built
-              around four pillars — designed to work together and improve over time as you do.
+              around four pillars - designed to work together and improve over time as you do.
             </p>
           </div>
         </div>
