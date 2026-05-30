@@ -211,6 +211,62 @@ function HBarRow({ label, pct, maxPct = 100, primary = false, index = 0 }: HBarR
   )
 }
 
+interface DonutChartProps {
+  data: { label: string; pct: number; primary?: boolean }[]
+}
+
+function DonutChart({ data }: DonutChartProps) {
+  const size = 140
+  const strokeWidth = 20
+  const radius = (size - strokeWidth) / 2
+  const circumference = radius * 2 * Math.PI
+
+  let currentOffset = 0
+
+  return (
+    <div className="flex flex-col sm:flex-row items-center gap-8 py-2">
+      <div className="relative" style={{ width: size, height: size }}>
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="transform -rotate-90">
+          {data.map((d, i) => {
+            const dasharray = (d.pct / 100) * circumference
+            const dashoffset = -currentOffset
+            currentOffset += dasharray
+            const color = d.primary ? 'var(--brand-red)' : i === 1 ? 'var(--steel)' : 'var(--hairline-strong)'
+            return (
+              <circle
+                key={d.label}
+                cx={size / 2}
+                cy={size / 2}
+                r={radius}
+                fill="none"
+                stroke={color}
+                strokeWidth={strokeWidth}
+                strokeDasharray={`${dasharray} ${circumference}`}
+                strokeDashoffset={dashoffset}
+                className="donut-segment transition-all duration-1000 ease-out"
+              />
+            )
+          })}
+        </svg>
+      </div>
+      <div className="flex flex-col gap-3 flex-1 w-full">
+        {data.map((d, i) => {
+          const color = d.primary ? 'var(--brand-red)' : i === 1 ? 'var(--steel)' : 'var(--hairline-strong)'
+          return (
+            <div key={d.label} className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-2.5 h-2.5 rounded-full" style={{ background: color }} />
+                <span className="text-sm" style={{ color: 'var(--charcoal)' }}>{d.label}</span>
+              </div>
+              <span className="text-sm font-bold" style={{ color: 'var(--ink)', fontFamily: 'var(--font-geist-mono)' }}>{d.pct}%</span>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 interface VBarColProps {
   label: string
   pct: number
@@ -477,9 +533,7 @@ export default function ResearchDashboard() {
               subtitle="Respondent status breakdown"
               finding="85% of respondents are currently enrolled students — the primary target user for Applytics."
             >
-              {STATUS_DATA.map((d, i) => (
-                <HBarRow key={d.label} {...d} index={i} />
-              ))}
+              <DonutChart data={STATUS_DATA} />
             </ChartCard>
             <div style={{ borderLeft: '1px solid var(--hairline)' }}>
               <ChartCard
@@ -605,9 +659,7 @@ export default function ResearchDashboard() {
           <SectionLabel>Monetization Signal</SectionLabel>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-0" style={{ border: '1px solid var(--hairline)' }}>
             <ChartCard title="Would Use Free Version" subtitle="Self-reported">
-              {FREE_DATA.map((d, i) => (
-                <HBarRow key={d.label} {...d} maxPct={75} index={i} />
-              ))}
+              <DonutChart data={FREE_DATA} />
             </ChartCard>
             <div style={{ borderLeft: '1px solid var(--hairline)' }}>
               <ChartCard
@@ -615,9 +667,7 @@ export default function ResearchDashboard() {
                 subtitle="Willingness to pay"
                 finding="86% said yes or maybe — strong signal for a freemium model."
               >
-                {PAY_DATA.map((d, i) => (
-                  <HBarRow key={d.label} {...d} maxPct={55} index={i} />
-                ))}
+                <DonutChart data={PAY_DATA} />
               </ChartCard>
             </div>
             <div style={{ borderLeft: '1px solid var(--hairline)' }}>

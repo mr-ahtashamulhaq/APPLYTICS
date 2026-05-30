@@ -8,10 +8,11 @@ import { List, X } from '@phosphor-icons/react'
 import { MetalButton } from '@/components/ui/liquid-glass-button'
 
 const NAV_LINKS = [
-  { label: 'The Problem', href: '#problem' },
-  { label: 'Platform',    href: '#platform' },
-  { label: 'Features',    href: '#features' },
-  { label: 'Pricing',     href: '#pricing' },
+  { label: 'The Problem', href: '/#problem' },
+  { label: 'Platform',    href: '/#platform' },
+  { label: 'Features',    href: '/#features' },
+  { label: 'Pricing',     href: '/#pricing' },
+  { label: 'Research',    href: '/research' },
 ]
 
 export default function Navbar() {
@@ -25,11 +26,14 @@ export default function Navbar() {
   }, [])
 
   const handleAnchor = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
+    // If it's a hash link and we're on the home page, scroll smoothly
+    if (href.startsWith('/#') && window.location.pathname === '/') {
       e.preventDefault()
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+      const hash = href.replace('/', '')
+      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
       setMobileOpen(false)
     }
+    // Otherwise let default Next.js routing handle it (cross-page)
   }
 
   return (
@@ -59,7 +63,7 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center gap-1">
           {NAV_LINKS.map(link => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 onClick={e => handleAnchor(e, link.href)}
                 className="px-4 py-2 text-sm font-medium rounded transition-colors"
@@ -68,7 +72,7 @@ export default function Navbar() {
                 onMouseLeave={e => { e.currentTarget.style.color = 'var(--slate)'; e.currentTarget.style.background = 'transparent' }}
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -112,7 +116,7 @@ export default function Navbar() {
             style={{ background: 'var(--canvas)', borderBottom: '1px solid var(--hairline)' }}
           >
             {NAV_LINKS.map(link => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={e => handleAnchor(e, link.href)}
@@ -120,7 +124,7 @@ export default function Navbar() {
                 style={{ color: 'var(--ink)', borderBottom: '1px solid var(--hairline)' }}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <div className="flex flex-col gap-2 pt-2">
               <Link href="/sign-in" className="py-2.5 text-sm font-medium text-center" style={{ color: 'var(--slate)' }}>
