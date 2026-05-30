@@ -116,7 +116,7 @@ function ProductMockup() {
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null)
 
-  const CYCLE_WORDS = ['resumes', 'applications', 'interviews', 'callbacks', 'offers']
+  const CYCLE_WORDS = ['interviews', 'responses', 'callbacks', 'offers']
 
   const slideUp = {
     hidden: { opacity: 0, y: 16 },
@@ -172,7 +172,7 @@ export default function Hero() {
               className="text-2xl lg:text-3xl font-light mb-6 relative"
               style={{ color: 'var(--ink)', lineHeight: 1.35, letterSpacing: '-0.5px' }}
             >
-              <span>Your job search is running on chaos. </span>
+              <span>Built to get more </span>
               <span style={{ color: 'var(--brand-red)', position: 'relative', display: 'inline-block' }}>
                 <AnimatedTextCycle
                   words={CYCLE_WORDS}
@@ -180,7 +180,7 @@ export default function Hero() {
                   className="text-2xl lg:text-3xl"
                 />
               </span>
-              <span> that actually get you hired.</span>
+              <span>.</span>
             </motion.div>
 
             {/* Body */}
@@ -189,9 +189,9 @@ export default function Hero() {
               className="text-base lg:text-lg mb-8 max-w-[520px]"
               style={{ color: 'var(--charcoal)', lineHeight: 1.65 }}
             >
-              12 tabs open. Spreadsheets. The same resume going everywhere. No idea why
+              12 tabs open. The same resume going everywhere. No idea why
               you&apos;re being rejected. Applytics is the single platform that manages your
-              entire job search &mdash; from finding the right opportunities to landing the offer.
+              entire job search.
             </motion.p>
 
             {/* CTAs */}
