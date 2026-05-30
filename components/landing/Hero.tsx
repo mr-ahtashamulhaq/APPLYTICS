@@ -129,8 +129,8 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100dvh] w-full overflow-hidden flex flex-col justify-center"
-      style={{ paddingTop: '64px', background: 'var(--canvas)' }}
+      className="relative w-full overflow-hidden flex flex-col justify-center"
+      style={{ paddingTop: '120px', paddingBottom: '40px', background: 'var(--canvas)' }}
     >
       {/* Grid background */}
       <BGPattern variant="grid" mask="fade-edges" size={36} fill="#e5e3df" />
@@ -187,7 +187,7 @@ export default function Hero() {
             <motion.p
               custom={3} variants={slideUp} initial="hidden" animate="visible"
               className="text-base lg:text-lg mb-8 max-w-[520px]"
-              style={{ color: 'var(--charcoal)', lineHeight: 1.65 }}
+              style={{ color: 'var(--charcoal)', lineHeight: 1.75 }}
             >
               12 tabs open. The same resume going everywhere. No idea why
               you&apos;re being rejected. Applytics is the single platform that manages your
