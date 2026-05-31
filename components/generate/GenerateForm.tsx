@@ -21,7 +21,7 @@ import { generateResume } from '@/lib/actions/generate'
 const generateSchema = z.object({
   job_title: z.string().min(2, 'Job title is required'),
   company_name: z.string().min(1, 'Company name is required'),
-  job_description: z.string().min(100, 'Please paste the full job description (min 100 characters)'),
+  job_description: z.string().optional(),
   required_skills: z.string().optional(),
 })
 type FormValues = z.infer<typeof generateSchema>
@@ -245,17 +245,18 @@ export default function GenerateForm() {
           <div className="mb-5">
             <h2 className="text-h4" style={{ color: 'var(--ink-deep)' }}>Job Description</h2>
             <p className="mt-1 text-sm" style={{ color: 'var(--steel)' }}>
-              Paste the full job description. The more detail, the better the match.
+              Paste the job description if you have one. Even a job title is enough — our AI handles vague or minimal listings.
             </p>
           </div>
           <div className="divider-h mb-5" />
 
-          <Label htmlFor="job_description" required>
-            <FileText size={14} /> Full Job Description
+          <Label htmlFor="job_description">
+            <FileText size={14} /> Job Description{' '}
+            <span style={{ color: 'var(--stone)', fontWeight: 400 }}>(optional)</span>
           </Label>
           <textarea
             id="job_description"
-            placeholder={`We are looking for a passionate Software Engineer Intern to join our team...\n\nResponsibilities:\n• Build and maintain REST APIs using Node.js\n• Work with React.js frontend\n\nRequirements:\n• Strong understanding of JavaScript\n• Familiarity with databases`}
+            placeholder={`Optional — paste the job description here if you have one.\n\nEven just a job title like "Frontend Developer" or a short sentence is fine.\nOur AI will tailor your resume based on whatever context you provide.`}
             className="w-full px-3 py-2.5 text-sm outline-none transition-all resize-vertical"
             style={{
               border: `1px solid ${errors.job_description ? 'var(--brand-red)' : 'var(--hairline-strong)'}`,
@@ -263,7 +264,7 @@ export default function GenerateForm() {
               background: 'var(--canvas)',
               color: 'var(--ink)',
               fontSize: '14px',
-              minHeight: '240px',
+              minHeight: '200px',
               lineHeight: '1.65',
             }}
             {...register('job_description', {
@@ -277,8 +278,8 @@ export default function GenerateForm() {
 
           <div className="flex items-center justify-between mt-1.5">
             <FieldError msg={errors.job_description?.message} />
-            <span className="text-xs ml-auto" style={{ color: jdLength >= 100 ? 'var(--success)' : 'var(--stone)' }}>
-              {jdLength} characters{jdLength < 100 ? ` (${100 - jdLength} more needed)` : ' ✓'}
+            <span className="text-xs ml-auto" style={{ color: jdLength > 0 ? 'var(--success)' : 'var(--stone)' }}>
+              {jdLength > 0 ? `${jdLength} characters` : 'Leave empty to generate a general resume'}
             </span>
           </div>
         </div>

@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle, WarningCircle, FloppyDisk } from '@phosphor-icons/react'
+import { CheckCircle, WarningCircle, FloppyDisk, PencilSimple } from '@phosphor-icons/react'
 import SkillsInput from './SkillsInput'
+import EditModal from '@/components/ui/EditModal'
 import { saveProfile, type ProfileFormData } from '@/lib/actions/profile'
 import { toast } from 'sonner'
 
@@ -154,6 +155,8 @@ interface ProfileFormProps {
 export default function ProfileForm({ initialData }: ProfileFormProps) {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle')
   const [saveError, setSaveError] = useState<string>('')
+  const [expModalOpen, setExpModalOpen] = useState(false)
+  const [projModalOpen, setProjModalOpen] = useState(false)
 
   const {
     register,
@@ -179,6 +182,8 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
   })
 
   const skills = watch('skills')
+  const expText  = watch('experience_text') ?? ''
+  const projText = watch('projects_text')  ?? ''
 
   const onSubmit = async (data: FormValues) => {
     setSaveStatus('saving')
@@ -334,12 +339,63 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
         description="Describe your work experience. Our AI will parse and format this into your resume."
       >
         <Label htmlFor="experience_text">Experience</Label>
-        <Textarea
+
+        {/* Preview card with Edit button */}
+        <div
+          className="relative w-full rounded"
+          style={{
+            border: '1px solid var(--hairline-strong)',
+            background: 'var(--surface)',
+            minHeight: '100px',
+          }}
+        >
+          <pre
+            className="px-3 py-2.5 text-sm w-full overflow-auto whitespace-pre-wrap"
+            style={{
+              color: expText ? 'var(--ink)' : 'var(--stone)',
+              fontFamily: 'inherit',
+              lineHeight: 1.65,
+              minHeight: '100px',
+              maxHeight: '200px',
+            }}
+          >
+            {expText || `Software Engineering Intern - Arbisoft (Jun 2024 – Aug 2024)\n• Built REST APIs using Node.js…`}
+          </pre>
+          <button
+            type="button"
+            onClick={() => setExpModalOpen(true)}
+            className="absolute top-2.5 right-2.5 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all"
+            style={{
+              background: 'var(--canvas)',
+              border: '1px solid var(--hairline-strong)',
+              borderRadius: 'var(--radius-sm)',
+              color: 'var(--ink)',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--brand-red)'; (e.currentTarget as HTMLElement).style.color = 'var(--brand-red)' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--hairline-strong)'; (e.currentTarget as HTMLElement).style.color = 'var(--ink)' }}
+          >
+            <PencilSimple size={12} weight="bold" />
+            Edit
+          </button>
+        </div>
+
+        {/* Hidden textarea keeps react-hook-form in sync */}
+        <textarea
           id="experience_text"
-          placeholder={`Software Engineering Intern - Arbisoft (Jun 2024 – Aug 2024)\n• Built REST APIs using Node.js and Express\n• Reduced API response time by 30%\n\nFreelance Web Developer (2023 – Present)\n• Delivered 10+ client projects using React and Next.js`}
-          style={{ minHeight: '160px' }}
           {...register('experience_text')}
+          style={{ display: 'none' }}
         />
+
+        <EditModal
+          isOpen={expModalOpen}
+          onClose={() => setExpModalOpen(false)}
+          title="Edit Work Experience"
+          hint="Write naturally — list each role, company, dates, and a few bullet points. Our AI will structure and tailor this for each job you apply to."
+          value={expText}
+          onChange={val => setValue('experience_text', val, { shouldDirty: true })}
+          placeholder={`Software Engineering Intern - Arbisoft (Jun 2024 – Aug 2024)\n• Built REST APIs using Node.js and Express\n• Reduced API response time by 30%\n\nFreelance Web Developer (2023 – Present)\n• Delivered 10+ client projects using React and Next.js`}
+        />
+
         <p className="mt-2 text-xs" style={{ color: 'var(--stone)' }}>
           Write naturally - our AI will structure this for each job application.
         </p>
@@ -351,11 +407,61 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
         description="Notable personal, academic, or open-source projects."
       >
         <Label htmlFor="projects_text">Projects</Label>
-        <Textarea
+
+        {/* Preview card with Edit button */}
+        <div
+          className="relative w-full rounded"
+          style={{
+            border: '1px solid var(--hairline-strong)',
+            background: 'var(--surface)',
+            minHeight: '80px',
+          }}
+        >
+          <pre
+            className="px-3 py-2.5 text-sm w-full overflow-auto whitespace-pre-wrap"
+            style={{
+              color: projText ? 'var(--ink)' : 'var(--stone)',
+              fontFamily: 'inherit',
+              lineHeight: 1.65,
+              minHeight: '80px',
+              maxHeight: '200px',
+            }}
+          >
+            {projText || `Applytics (2024)\n• AI-powered resume tailoring platform…`}
+          </pre>
+          <button
+            type="button"
+            onClick={() => setProjModalOpen(true)}
+            className="absolute top-2.5 right-2.5 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all"
+            style={{
+              background: 'var(--canvas)',
+              border: '1px solid var(--hairline-strong)',
+              borderRadius: 'var(--radius-sm)',
+              color: 'var(--ink)',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--brand-red)'; (e.currentTarget as HTMLElement).style.color = 'var(--brand-red)' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--hairline-strong)'; (e.currentTarget as HTMLElement).style.color = 'var(--ink)' }}
+          >
+            <PencilSimple size={12} weight="bold" />
+            Edit
+          </button>
+        </div>
+
+        {/* Hidden textarea keeps react-hook-form in sync */}
+        <textarea
           id="projects_text"
-          placeholder={`Applytics (2024)\n• AI-powered resume tailoring platform built with Next.js, Supabase, and Groq\n• github.com/username/applytics\n\nPortfolio Website\n• Personal site built with React - 1,000+ monthly visitors`}
-          style={{ minHeight: '140px' }}
           {...register('projects_text')}
+          style={{ display: 'none' }}
+        />
+
+        <EditModal
+          isOpen={projModalOpen}
+          onClose={() => setProjModalOpen(false)}
+          title="Edit Projects"
+          hint="List your notable personal, academic, or open-source projects. Include the name, year, tech stack, and any key outcomes."
+          value={projText}
+          onChange={val => setValue('projects_text', val, { shouldDirty: true })}
+          placeholder={`Applytics (2024)\n• AI-powered resume tailoring platform built with Next.js, Supabase, and Groq\n• github.com/username/applytics\n\nPortfolio Website\n• Personal site built with React - 1,000+ monthly visitors`}
         />
       </Section>
 
