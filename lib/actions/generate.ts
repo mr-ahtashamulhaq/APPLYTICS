@@ -5,7 +5,7 @@ import { supabaseAdmin } from '@/lib/supabase/admin'
 import { ensureUser } from '@/lib/auth/ensureUser'
 import { getGroqClient, GROQ_MODEL } from '@/lib/groq/client'
 import { z } from 'zod'
-import { aiResultSchema, validateResumeEvidence } from '@/lib/validation/resume'
+import { aiResultSchema, filterSupportedSkills, validateResumeEvidence } from '@/lib/validation/resume'
 import { abuseControlMessage, checkAbuseControl } from '@/lib/security/abuseControls'
 import { recordUsageEvent } from '@/lib/telemetry/usageEvents'
 export type { AIResult } from '@/lib/validation/resume'
@@ -81,7 +81,9 @@ STRICT RULES - NEVER VIOLATE:
 - Do NOT invent tools or technologies not mentioned in the profile
 - Do NOT fabricate numbers or metrics that are not present in the original
 - Do NOT add a project, role, employer, date, technology, certification, or achievement that is not supported by the profile
-- Keep suggested and missing keywords separate from the candidate's factual resume content
+- Every item in skills_to_emphasize must be copied or lightly normalized from the candidate profile; never put a job-description-only skill there
+- Keep suggested and missing keywords separate from the candidate's factual resume content; job-description-only terms may appear only in those keyword arrays
+- If the profile does not support a factual claim, omit it instead of guessing
 - Calculate match_score only from observable overlap between the supplied profile and job requirements; it is an estimate, not a fact
 - You MAY rewrite weak or vague bullet points into stronger, more impact-driven language
 - You MAY expand and elaborate on what the candidate has described
@@ -310,8 +312,7 @@ export async function generateResume(rawInput: GenerateInput): Promise<GenerateR
       console.error('[generateResume] AI schema validation failed:', parsedAiResult.error.issues.length)
       return { success: false, error: 'AI response did not match the required resume format. Please try again.' }
     }
-    const aiResult = parsedAiResult.data
-    const unsupportedClaim = validateResumeEvidence(aiResult, [
+    const profileEvidence = [
       profile.skills ?? [],
       profile.experience_text ?? '',
       profile.projects_text ?? '',
@@ -327,7 +328,9 @@ export async function generateResume(rawInput: GenerateInput): Promise<GenerateR
       profile.awards_text ?? '',
       profile.languages_text ?? '',
       profile.interests_text ?? '',
-    ].join(' '))
+    ].join(' ')
+    const aiResult = filterSupportedSkills(parsedAiResult.data, profileEvidence)
+    const unsupportedClaim = validateResumeEvidence(aiResult, profileEvidence)
     if (unsupportedClaim) {
       console.error('[generateResume] AI evidence validation failed:', unsupportedClaim.split(':')[0])
       return { success: false, error: 'AI response included content that was not supported by your profile. Please try again.' }

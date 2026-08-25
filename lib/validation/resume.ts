@@ -32,11 +32,37 @@ function numbersIn(value: string) {
   return value.match(/\d+(?:\.\d+)?/g) ?? []
 }
 
+function singularToken(token: string) {
+  return token.length > 3 && token.endsWith('s') ? token.slice(0, -1) : token
+}
+
+/**
+ * Check whether a short generated term is supported by the supplied evidence.
+ * This accepts harmless variants such as "REST API" / "REST APIs" while
+ * requiring every meaningful word to exist in the evidence.
+ */
+export function termSupportedByEvidence(term: string, profileEvidence: string) {
+  const normalizedTerm = normalize(term)
+  const normalizedEvidence = normalize(profileEvidence)
+  if (!normalizedTerm || !normalizedEvidence) return false
+  if (normalizedEvidence.includes(normalizedTerm)) return true
+
+  const evidenceTokens = new Set(normalizedEvidence.split(' ').map(singularToken))
+  return normalizedTerm.split(' ').every((token) => evidenceTokens.has(singularToken(token)))
+}
+
+export function filterSupportedSkills(result: AIResult, profileEvidence: string): AIResult {
+  return {
+    ...result,
+    skills_to_emphasize: result.skills_to_emphasize.filter((skill) => termSupportedByEvidence(skill, profileEvidence)),
+  }
+}
+
 export function validateResumeEvidence(result: AIResult, profileEvidence: string): string | null {
   const evidence = normalize(profileEvidence)
   const supportedNumbers = new Set(numbersIn(profileEvidence))
 
-  const unsupportedSkill = result.skills_to_emphasize.find((skill) => !evidence.includes(normalize(skill)))
+  const unsupportedSkill = result.skills_to_emphasize.find((skill) => !termSupportedByEvidence(skill, evidence))
   if (unsupportedSkill) return `Unsupported skill: ${unsupportedSkill}`
 
   const unsupportedExperience = result.rewritten_experience.find((entry) => (
