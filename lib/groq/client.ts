@@ -12,6 +12,6 @@ export function getGroqClient() {
   return client
 }
 
-// The model to use for resume generation
-// llama-3.3-70b-versatile has a large 128k context window — good for long resumes
-export const GROQ_MODEL = 'llama-3.3-70b-versatile'
+// Groq retired llama-3.3-70b-versatile for free and developer-tier usage.
+// GPT OSS 120B is the current production replacement for this workload.
+export const GROQ_MODEL = 'openai/gpt-oss-120b'

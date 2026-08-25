@@ -54,8 +54,13 @@ export default async function RecommendationsPage() {
         <p className="text-label mb-1">Recommendations</p>
         <h1 className="text-h1" style={{ color: 'var(--ink-deep)' }}>Roles worth a closer look</h1>
         <p className="mt-2 max-w-2xl text-sm" style={{ color: 'var(--steel)' }}>
-          These suggestions use the skills and city in your profile. Each reason is shown so you can decide whether the role fits.
+          These roles are ranked using your skills, target roles, and city. Direct matches appear first, and new listings remain visible for review.
         </p>
+        {!result.error && result.catalogCount > 0 && (
+          <p className="mt-3 text-xs" style={{ color: 'var(--stone)' }}>
+            Showing {result.recommendations.length} of {result.catalogCount} active catalog roles.
+          </p>
+        )}
       </header>
 
       {result.profileMissing && (
@@ -70,7 +75,7 @@ export default async function RecommendationsPage() {
       {!result.error && result.recommendations.length === 0 && (
         <div className="border px-6 py-14 text-center" style={{ borderColor: 'var(--hairline)', background: 'var(--canvas)', borderRadius: 'var(--radius-lg)' }}>
           <h2 className="text-h3" style={{ color: 'var(--ink-deep)' }}>No recommendation signals yet</h2>
-          <p className="mx-auto mt-2 max-w-md text-sm" style={{ color: 'var(--steel)' }}>Browse the catalog or add more profile details. Applytics will not invent a match when the data is missing.</p>
+          <p className="mx-auto mt-2 max-w-md text-sm" style={{ color: 'var(--steel)' }}>The active catalog is empty right now. Try the Jobs page again later, or add more profile details so ranking can be more useful when new roles arrive.</p>
           <Link href="/app/jobs" className="mt-5 inline-flex min-h-11 items-center justify-center px-4 text-sm font-semibold" style={{ background: 'var(--brand-black)', color: 'var(--on-dark)', borderRadius: 'var(--radius-md)' }}>Browse jobs</Link>
         </div>
       )}

@@ -63,6 +63,13 @@ export async function GET(
     university: profile?.university ?? undefined,
     degree: profile?.degree ?? undefined,
     graduation_status: profile?.graduation_status ?? undefined,
+    certifications_text: profile?.certifications_text ?? undefined,
+    publications_text: profile?.publications_text ?? undefined,
+    test_scores_text: profile?.test_scores_text ?? undefined,
+    volunteer_text: profile?.volunteer_text ?? undefined,
+    awards_text: profile?.awards_text ?? undefined,
+    languages_text: profile?.languages_text ?? undefined,
+    interests_text: profile?.interests_text ?? undefined,
   }
 
   const pdfElement = ResumePDF({

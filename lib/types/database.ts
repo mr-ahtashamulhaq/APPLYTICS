@@ -22,6 +22,19 @@ export interface Profile {
   degree: string | null
   university: string | null
   graduation_status: string | null
+  headline: string | null
+  summary: string | null
+  pronouns: string | null
+  desired_roles: string[] | null
+  availability: string | null
+  work_authorization: string | null
+  certifications_text: string | null
+  publications_text: string | null
+  test_scores_text: string | null
+  volunteer_text: string | null
+  awards_text: string | null
+  languages_text: string | null
+  interests_text: string | null
   skills: string[] | null
   experience_text: string | null
   projects_text: string | null

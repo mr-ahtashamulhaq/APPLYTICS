@@ -152,6 +152,11 @@ const s = StyleSheet.create({
     color: '#555',
     marginTop: 1,
   },
+  profileText: {
+    fontSize: 9.5,
+    color: '#2a2a2a',
+    lineHeight: 1.5,
+  },
 })
 
 // ── Helper: render a bullet point ───────────────────────────────
@@ -189,6 +194,13 @@ interface Props {
     university?: string
     degree?: string
     graduation_status?: string
+    certifications_text?: string
+    publications_text?: string
+    test_scores_text?: string
+    volunteer_text?: string
+    awards_text?: string
+    languages_text?: string
+    interests_text?: string
   }
 }
 
@@ -284,6 +296,20 @@ export default function ResumePDF({ ai, jobTitle, company, profile }: Props) {
             </View>
           </Section>
         )}
+
+        {[
+          ['Certifications', profile.certifications_text],
+          ['Publications and Research', profile.publications_text],
+          ['Test Scores', profile.test_scores_text],
+          ['Volunteer Experience', profile.volunteer_text],
+          ['Awards and Honours', profile.awards_text],
+          ['Languages', profile.languages_text],
+          ['Professional Interests', profile.interests_text],
+        ].map(([title, value]) => typeof value === 'string' && value.trim() ? (
+          <Section key={title ?? 'profile-section'} title={title ?? 'Additional Information'}>
+            <Text style={s.profileText}>{value.trim()}</Text>
+          </Section>
+        ) : null)}
 
       </Page>
     </Document>

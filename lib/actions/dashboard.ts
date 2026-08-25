@@ -77,7 +77,7 @@ export async function loadDashboard(): Promise<DashboardData | null> {
         .order('created_at', { ascending: false }),
       supabaseAdmin
         .from('profiles')
-        .select('experience_text, skills')
+        .select('experience_text, projects_text, summary, desired_roles, skills')
         .eq('user_id', user.id)
         .single(),
     ])
@@ -112,7 +112,13 @@ export async function loadDashboard(): Promise<DashboardData | null> {
       appliedDate: a.applied_date,
     }))
 
-    const profileComplete = !!(profile?.experience_text && profile?.skills?.length)
+    const profileComplete = Boolean(
+      profile?.summary ||
+      profile?.experience_text ||
+      profile?.projects_text ||
+      profile?.skills?.length ||
+      profile?.desired_roles?.length
+    )
 
     return {
       stats: {

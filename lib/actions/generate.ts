@@ -40,8 +40,17 @@ const DAILY_GENERATION_GUARD = 20
 
 function buildPrompt(profile: Record<string, unknown>, input: GenerateInput): string {
   const experienceText = (profile.experience_text as string | null) ?? ''
-  const projectsText   = (profile.projects_text   as string | null) ?? ''
+  const projectsText = (profile.projects_text as string | null) ?? ''
   const jobDescription = (input.job_description ?? '').trim()
+  const profileSections = [
+    ['Certifications and courses', profile.certifications_text],
+    ['Publications and research', profile.publications_text],
+    ['Test scores', profile.test_scores_text],
+    ['Volunteering and leadership', profile.volunteer_text],
+    ['Awards and honours', profile.awards_text],
+    ['Languages', profile.languages_text],
+    ['Professional interests', profile.interests_text],
+  ].map(([label, value]) => `${label}: ${typeof value === 'string' && value.trim() ? value.trim() : 'Not provided'}`).join('\\n\\n')
 
   // Count rough number of experience/project entries to decide depth
   const expEntryCount  = experienceText ? (experienceText.match(/\n\n/g)?.length ?? 0) + 1 : 0
@@ -90,9 +99,15 @@ ${depthInstruction}
 
 CANDIDATE PROFILE:
 Name: ${profile.full_name ?? 'Not provided'}
+Headline: ${profile.headline ?? 'Not provided'}
+About: ${profile.summary ?? 'Not provided'}
 City: ${profile.city ?? 'Not provided'}
 Education: ${profile.degree ?? ''} at ${profile.university ?? ''} (${profile.graduation_status ?? ''})
 Skills: ${(profile.skills as string[] ?? []).join(', ') || 'Not provided'}
+Target roles: ${(profile.desired_roles as string[] ?? []).join(', ') || 'Not provided'}
+
+Additional profile evidence:
+${profileSections}
 
 Work Experience:
 ${experienceText || 'Not provided'}
@@ -244,8 +259,18 @@ export async function generateResume(rawInput: GenerateInput): Promise<GenerateR
         university: profile.university,
         graduation_status: profile.graduation_status,
         skills: profile.skills ?? [],
+        headline: profile.headline,
+        summary: profile.summary,
+        desired_roles: profile.desired_roles ?? [],
         experience_text: profile.experience_text,
         projects_text: profile.projects_text,
+        certifications_text: profile.certifications_text,
+        publications_text: profile.publications_text,
+        test_scores_text: profile.test_scores_text,
+        volunteer_text: profile.volunteer_text,
+        awards_text: profile.awards_text,
+        languages_text: profile.languages_text,
+        interests_text: profile.interests_text,
       },
       resolvedInput
     )
@@ -292,6 +317,16 @@ export async function generateResume(rawInput: GenerateInput): Promise<GenerateR
       profile.projects_text ?? '',
       profile.degree ?? '',
       profile.university ?? '',
+      profile.headline ?? '',
+      profile.summary ?? '',
+      profile.desired_roles ?? [],
+      profile.certifications_text ?? '',
+      profile.publications_text ?? '',
+      profile.test_scores_text ?? '',
+      profile.volunteer_text ?? '',
+      profile.awards_text ?? '',
+      profile.languages_text ?? '',
+      profile.interests_text ?? '',
     ].join(' '))
     if (unsupportedClaim) {
       console.error('[generateResume] AI evidence validation failed:', unsupportedClaim.split(':')[0])
