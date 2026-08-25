@@ -153,8 +153,7 @@ function RichTextSection({
 }) {
   return (
     <Section title={title} description={description} icon={icon}>
-      <Label htmlFor={id}>{title}</Label>
-      <Textarea id={id} rows={6} placeholder={placeholder} {...register(name as never)} />
+      <Textarea id={id} rows={6} aria-label={title} placeholder={placeholder} {...register(name as never)} />
       <p className="mt-2 text-xs" style={{ color: 'var(--stone)' }}>{hint}{value ? ` ${value.length} characters.` : ''}</p>
     </Section>
   )
