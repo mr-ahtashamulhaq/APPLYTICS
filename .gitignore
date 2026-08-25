@@ -56,3 +56,5 @@ passwords.md
 .env.local
 components.md
 responses.csv
+docs/
+design-system/
