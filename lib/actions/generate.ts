@@ -277,23 +277,38 @@ export async function generateResume(rawInput: GenerateInput): Promise<GenerateR
       resolvedInput
     )
 
-    // 6. Call Groq
-    const completion = await getGroqClient().chat.completions.create({
-      model: GROQ_MODEL,
-      messages: [
-        {
-          role: 'system',
-          content: 'You are an expert ATS resume writer. Always respond with valid JSON only. No markdown, no code blocks, just raw JSON.',
-        },
-        {
-          role: 'user',
-          content: userMessage,
-        },
-      ],
-      response_format: { type: 'json_object' },
-      temperature: 0.4,
-      max_tokens: 3000,
-    })
+    // 6. Call Groq with a bounded timeout so a slow provider cannot leave the
+    // client in an indefinite loading state.
+    const abortController = new AbortController()
+    const timeoutId = setTimeout(() => abortController.abort(), 45_000)
+    let completion
+    try {
+      completion = await getGroqClient().chat.completions.create({
+        model: GROQ_MODEL,
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an expert ATS resume writer. Always respond with valid JSON only. No markdown, no code blocks, just raw JSON.',
+          },
+          {
+            role: 'user',
+            content: userMessage,
+          },
+        ],
+        response_format: { type: 'json_object' },
+        temperature: 0.4,
+        max_tokens: 3000,
+      }, {
+        signal: abortController.signal,
+      })
+    } catch (err) {
+      if (abortController.signal.aborted) {
+        return { success: false, error: 'The AI service took too long to respond. Please try again.' }
+      }
+      throw err
+    } finally {
+      clearTimeout(timeoutId)
+    }
 
     const rawJson = completion.choices[0]?.message?.content
     if (!rawJson) return { success: false, error: 'AI returned empty response. Please try again.' }

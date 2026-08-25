@@ -13,5 +13,6 @@ export function getGroqClient() {
 }
 
 // Groq retired llama-3.3-70b-versatile for free and developer-tier usage.
-// GPT OSS 120B is the current production replacement for this workload.
-export const GROQ_MODEL = 'openai/gpt-oss-120b'
+// GPT OSS 20B is a current production model with JSON and JSON-schema support,
+// and its higher inference speed keeps resume generation responsive.
+export const GROQ_MODEL = 'openai/gpt-oss-20b'
