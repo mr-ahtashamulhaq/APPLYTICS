@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://applytics-k6a9len1d-mr-ahtashamulhaqs-projects.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.applytics.online'),
   title: {
     default: 'Applytics | Job search tools for Pakistan',
     template: '%s | Applytics',

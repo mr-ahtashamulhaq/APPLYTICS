@@ -123,8 +123,8 @@ Use Node.js 22 or a compatible current Node.js release. Create accounts for Cler
 ### Install
 
 ```bash
-git clone https://github.com/mr-ahtashamulhaq/applytics-manus.git
-cd applytics-manus
+git clone https://github.com/mr-ahtashamulhaq/APPLYTICS.git
+cd APPLYTICS
 npm install
 ```
 
@@ -161,7 +161,7 @@ npm run build
 
 The current lint baseline has zero errors and 140 existing warnings. Treat a new error as a release blocker. Run the Impeccable detector for changed UI files before a UI commit.
 
-Every meaningful change must update `plan.md`, use a commit message of no more than three words with no punctuation, and push to `mr-ahtashamulhaq/applytics-manus`. Do not push application work to the historical `APPLYTICS` repository.
+Every meaningful change must update `plan.md`, use a commit message of no more than three words with no punctuation, and push to the `mr-ahtashamulhaq/APPLYTICS` repository. Keep deployment configuration and secrets in the linked Vercel project; do not commit `.env.local` or service keys.
 
 ## Security boundary
 
