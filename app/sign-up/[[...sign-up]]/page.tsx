@@ -2,8 +2,8 @@ import { SignUp } from '@clerk/nextjs'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'Applytics',
-  description: 'Create your free Applytics account and start tailoring resumes.',
+  title: 'Create an Applytics account',
+  description: 'Create a free early-access account to find listings, tailor resumes, and track applications.',
 }
 
 export default function SignUpPage() {
@@ -21,8 +21,9 @@ export default function SignUpPage() {
         }}
       >
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <Image src="/chrome-shiny-wordmark.png" alt="Applytics" width={50} height={32} className="object-contain" />
+        <div className="flex items-center gap-3">
+          <Image src="/applytics-logo.png" alt="" width={40} height={40} className="h-10 w-10 object-contain" aria-hidden="true" />
+          <span className="text-lg font-semibold tracking-tight" style={{ color: 'var(--on-dark)' }}>Applytics</span>
         </div>
 
         {/* Value points */}
@@ -31,14 +32,14 @@ export default function SignUpPage() {
             className="text-h2 mb-5"
             style={{ color: 'var(--on-dark)', letterSpacing: '-0.5px' }}
           >
-            Your resume, tailored in seconds.
+            Start with a clearer job search.
           </h2>
           <ul className="flex flex-col gap-3">
             {[
-              'Paste any job description',
-              'AI tailors your resume to match',
-              'Download an ATS-friendly PDF',
-              'Track every application in one place',
+              'Browse the current verified job catalog',
+              'Compare listings with your profile',
+              'Review a job-specific resume draft',
+              'Track applications and follow-ups',
             ].map((point) => (
               <li key={point} className="flex items-center gap-3">
                 <span
@@ -67,7 +68,8 @@ export default function SignUpPage() {
         <div className="w-full max-w-sm">
           <div className="mb-6 lg:hidden">
             <div className="flex items-center gap-2 mb-4">
-              <Image src="/chrome-shiny-wordmark.png" alt="Applytics" width={100} height={32} className="object-contain" />
+              <Image src="/applytics-logo.png" alt="" width={32} height={32} className="h-8 w-8 object-contain" aria-hidden="true" />
+              <span className="text-base font-semibold tracking-tight" style={{ color: 'var(--ink-deep)' }}>Applytics</span>
             </div>
           </div>
 
@@ -77,10 +79,6 @@ export default function SignUpPage() {
               variables: {
                 colorPrimary: '#de0d12',
                 colorBackground: '#ffffff',
-                colorText: '#1a1a1a',
-                colorTextSecondary: '#787671',
-                colorInputBackground: '#ffffff',
-                colorInputText: '#1a1a1a',
                 borderRadius: '6px',
                 fontFamily: 'var(--font-geist-sans)',
               },
