@@ -22,8 +22,9 @@ export default function SignInPage() {
         }}
       >
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <Image src="/chrome-shiny-wordmark.png" alt="Applytics" width={100} height={32} className="object-contain" />
+        <div className="flex items-center gap-3">
+          <Image src="/applytics-logo.png" alt="" width={40} height={40} className="h-10 w-10 object-contain" aria-hidden="true" />
+          <span className="text-lg font-semibold tracking-tight" style={{ color: 'var(--on-dark)' }}>Applytics</span>
         </div>
 
         {/* Tagline */}
@@ -32,10 +33,10 @@ export default function SignInPage() {
             className="text-h2 mb-3"
             style={{ color: 'var(--on-dark)', letterSpacing: '-0.5px' }}
           >
-            Tailored resumes for every job.
+            Bring context to every application.
           </h2>
           <p className="text-sm leading-relaxed" style={{ color: 'var(--on-dark-muted)' }}>
-            Paste a job description. Get an ATS-optimized resume in seconds. Built for Pakistani students and graduates.
+            Choose a current listing or enter job details. Review a job-specific resume draft and keep the application record connected.
           </p>
         </div>
 
@@ -50,7 +51,8 @@ export default function SignInPage() {
         <div className="w-full max-w-sm">
           <div className="mb-6 lg:hidden">
             <div className="flex items-center gap-2 mb-4">
-              <Image src="/chrome-shiny-wordmark.png" alt="Applytics" width={100} height={32} className="object-contain" />
+              <Image src="/applytics-logo.png" alt="" width={32} height={32} className="h-8 w-8 object-contain" aria-hidden="true" />
+              <span className="text-base font-semibold tracking-tight" style={{ color: 'var(--ink-deep)' }}>Applytics</span>
             </div>
           </div>
 
@@ -60,10 +62,6 @@ export default function SignInPage() {
               variables: {
                 colorPrimary: '#de0d12',
                 colorBackground: '#ffffff',
-                colorText: '#1a1a1a',
-                colorTextSecondary: '#787671',
-                colorInputBackground: '#ffffff',
-                colorInputText: '#1a1a1a',
                 borderRadius: '6px',
                 fontFamily: 'var(--font-geist-sans)',
               },
