@@ -8,8 +8,12 @@ import { motion } from 'framer-motion'
 import {
   SquaresFour,
   FileText,
+  Briefcase,
+  BookmarkSimple,
+  Sparkle,
   Kanban,
   User,
+  ShieldCheck,
 } from '@phosphor-icons/react'
 
 const NAV_ITEMS = [
@@ -24,6 +28,21 @@ const NAV_ITEMS = [
     icon: FileText,
   },
   {
+    label: 'Jobs',
+    href: '/app/jobs',
+    icon: Briefcase,
+  },
+  {
+    label: 'Recommendations',
+    href: '/app/recommendations',
+    icon: Sparkle,
+  },
+  {
+    label: 'Saved jobs',
+    href: '/app/saved-jobs',
+    icon: BookmarkSimple,
+  },
+  {
     label: 'Tracker',
     href: '/app/tracker',
     icon: Kanban,
@@ -32,6 +51,11 @@ const NAV_ITEMS = [
     label: 'Profile',
     href: '/app/profile',
     icon: User,
+  },
+  {
+    label: 'Privacy and data',
+    href: '/app/account',
+    icon: ShieldCheck,
   },
 ]
 
@@ -69,7 +93,7 @@ export default function Sidebar() {
       >
         {/* Wordmark */}
         <Link href="/" className="flex items-center gap-2 group">
-          <Image src="/wordmark.png" alt="Applytics Logo" width={32} height={32} className="object-contain" />
+          <Image src="/applytics-logo.png" alt="Applytics logo" width={32} height={32} className="h-8 w-8 object-contain" />
           <span
             className="text-h4 tracking-tight select-none"
             style={{ color: 'var(--ink-deep)', letterSpacing: '-0.5px' }}
