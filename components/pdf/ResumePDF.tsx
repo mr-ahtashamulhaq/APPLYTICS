@@ -4,172 +4,172 @@ import {
   Text,
   View,
   StyleSheet,
-  Font,
   Link,
 } from '@react-pdf/renderer'
 import type { AIResult } from '@/lib/actions/generate'
 
-// Prevent word hyphenation
-Font.registerHyphenationCallback((word) => [word])
-
 // ── Styles ───────────────────────────────────────────────────────
+// Standard PDF Times fonts are embedded as reliable base-14 fonts by PDF
+// viewers and remain machine-readable for ATS extraction.
 const s = StyleSheet.create({
   page: {
-    fontFamily: 'Helvetica',
-    fontSize: 10,
-    color: '#1a1a1a',
-    paddingTop: 44,
-    paddingBottom: 44,
-    paddingHorizontal: 52,
-    lineHeight: 1.4,
+    fontFamily: 'Times-Roman',
+    fontSize: 9.2,
+    color: '#1b1b1b',
+    paddingTop: 40,
+    paddingBottom: 38,
+    paddingHorizontal: 40,
+    lineHeight: 1.22,
   },
 
-  // ── HEADER (centered) ─────────────────────────────────────────
   header: {
     alignItems: 'center',
-    marginBottom: 14,
+    marginBottom: 9,
   },
   name: {
-    fontSize: 22,
-    fontFamily: 'Helvetica-Bold',
-    color: '#0f0f0f',
-    letterSpacing: 0.8,
+    fontSize: 18.5,
+    fontFamily: 'Times-Bold',
+    color: '#111111',
+    letterSpacing: 1.1,
+    lineHeight: 1.3,
     textAlign: 'center',
-    marginBottom: 5,
+    marginBottom: 7,
   },
   contactRow: {
+    width: '100%',
+    minHeight: 11,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: 4,
-  },
-  contactSep: {
-    fontSize: 8.5,
-    color: '#999',
-    marginHorizontal: 2,
+    alignItems: 'center',
+    lineHeight: 1.2,
   },
   contactItem: {
-    fontSize: 8.5,
-    color: '#444',
+    fontSize: 8.4,
+    color: '#222222',
+    lineHeight: 1.2,
   },
   contactLink: {
-    fontSize: 8.5,
-    color: '#2563eb',
+    fontSize: 8.4,
+    color: '#222222',
     textDecoration: 'none',
+    lineHeight: 1.2,
+  },
+  contactSep: {
+    fontSize: 8.2,
+    color: '#555555',
+    marginHorizontal: 4,
   },
 
-  // ── SECTION ───────────────────────────────────────────────────
   section: {
-    marginBottom: 13,
+    marginBottom: 8,
+    minPresenceAhead: 24,
   },
   sectionTitle: {
-    fontSize: 8.5,
-    fontFamily: 'Helvetica-Bold',
-    color: '#de0d12',
+    fontSize: 9.1,
+    fontFamily: 'Times-Bold',
+    color: '#191919',
     textTransform: 'uppercase',
-    letterSpacing: 1.5,
-    marginBottom: 5,
-    paddingBottom: 2.5,
-    borderBottomWidth: 0.75,
-    borderBottomColor: '#ddd',
+    letterSpacing: 0.85,
+    marginBottom: 4,
+    paddingBottom: 2.2,
+    borderBottomWidth: 0.6,
+    borderBottomColor: '#333333',
     borderBottomStyle: 'solid',
   },
-
-  // ── SUMMARY ───────────────────────────────────────────────────
   summary: {
-    fontSize: 10,
-    color: '#2a2a2a',
-    lineHeight: 1.55,
-    textAlign: 'justify',
+    fontSize: 9.4,
+    color: '#222222',
+    lineHeight: 1.3,
   },
-
-  // ── SKILLS ────────────────────────────────────────────────────
   skillsText: {
-    fontSize: 9.5,
-    color: '#2a2a2a',
-    lineHeight: 1.5,
+    fontSize: 8.9,
+    color: '#222222',
+    lineHeight: 1.26,
   },
 
-  // ── EXPERIENCE / PROJECTS ─────────────────────────────────────
   entry: {
-    marginBottom: 9,
+    marginBottom: 6,
+    minPresenceAhead: 25,
   },
   entryHeaderRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 1,
+    width: '100%',
+  },
+  entryPrimary: {
+    flex: 1,
+    paddingRight: 8,
   },
   entryTitle: {
-    fontSize: 10.5,
-    fontFamily: 'Helvetica-Bold',
-    color: '#0f0f0f',
+    fontSize: 9.8,
+    fontFamily: 'Times-Bold',
+    color: '#111111',
+    lineHeight: 1.15,
   },
   entrySub: {
-    fontSize: 9.5,
-    fontFamily: 'Helvetica-Oblique',
-    color: '#555',
-    marginBottom: 3,
+    fontSize: 8.8,
+    fontFamily: 'Times-Italic',
+    color: '#3d3d3d',
+    marginTop: 1,
+    lineHeight: 1.15,
   },
   entryDate: {
-    fontSize: 9,
-    color: '#777',
-    fontFamily: 'Helvetica-Oblique',
+    maxWidth: '42%',
+    fontSize: 8.6,
+    color: '#222222',
+    fontFamily: 'Times-Italic',
+    textAlign: 'right',
+    lineHeight: 1.15,
   },
   bulletRow: {
     flexDirection: 'row',
-    marginBottom: 2,
-    paddingLeft: 4,
+    alignItems: 'flex-start',
+    marginTop: 1.2,
+    paddingLeft: 5,
+    width: '100%',
   },
   bulletChar: {
-    fontSize: 9,
-    color: '#de0d12',
-    width: 10,
-    marginTop: 0.5,
-    flexShrink: 0,
+    width: 8,
+    fontSize: 8.6,
+    color: '#222222',
+    lineHeight: 1.24,
   },
   bulletText: {
-    fontSize: 9.5,
-    color: '#2a2a2a',
     flex: 1,
-    lineHeight: 1.5,
+    fontSize: 8.85,
+    color: '#222222',
+    lineHeight: 1.24,
   },
 
-  // ── EDUCATION ─────────────────────────────────────────────────
-  eduHeaderRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+  educationTitle: {
+    fontSize: 9.8,
+    fontFamily: 'Times-Bold',
+    color: '#111111',
   },
-  eduTitle: {
-    fontSize: 10.5,
-    fontFamily: 'Helvetica-Bold',
-    color: '#0f0f0f',
-  },
-  eduSub: {
-    fontSize: 9.5,
-    fontFamily: 'Helvetica-Oblique',
-    color: '#555',
+  educationSub: {
+    fontSize: 8.8,
+    fontFamily: 'Times-Italic',
+    color: '#3d3d3d',
     marginTop: 1,
   },
   profileText: {
-    fontSize: 9.5,
-    color: '#2a2a2a',
-    lineHeight: 1.5,
+    fontSize: 8.9,
+    color: '#222222',
+    lineHeight: 1.26,
   },
 })
 
-// ── Helper: render a bullet point ───────────────────────────────
 function Bullet({ text }: { text: string }) {
   return (
-    <View style={s.bulletRow}>
+    <View style={s.bulletRow} wrap>
       <Text style={s.bulletChar}>•</Text>
       <Text style={s.bulletText}>{text}</Text>
     </View>
   )
 }
 
-// ── Helper: section wrapper ──────────────────────────────────────
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <View style={s.section}>
@@ -179,7 +179,6 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   )
 }
 
-// ── Component ────────────────────────────────────────────────────
 interface Props {
   ai: AIResult
   jobTitle: string
@@ -205,13 +204,22 @@ interface Props {
 }
 
 export default function ResumePDF({ ai, jobTitle, company, profile }: Props) {
-  // Build contact items
   const contacts: { text: string; href?: string }[] = []
-  if (profile.email)         contacts.push({ text: profile.email })
-  if (profile.phone)         contacts.push({ text: profile.phone })
-  if (profile.city)          contacts.push({ text: profile.city })
-  if (profile.linkedin_url)  contacts.push({ text: 'LinkedIn', href: profile.linkedin_url })
-  if (profile.portfolio_url) contacts.push({ text: 'Portfolio', href: profile.portfolio_url })
+  if (profile.email) contacts.push({ text: profile.email })
+  if (profile.phone) contacts.push({ text: profile.phone })
+  if (profile.city) contacts.push({ text: profile.city })
+  if (profile.linkedin_url) contacts.push({ text: 'LinkedIn', href: profile.linkedin_url })
+  if (profile.portfolio_url) contacts.push({ text: 'Portfolio / GitHub', href: profile.portfolio_url })
+
+  const additionalSections: Array<[string, string | undefined]> = [
+    ['Certifications', profile.certifications_text],
+    ['Publications and Research', profile.publications_text],
+    ['Test Scores', profile.test_scores_text],
+    ['Volunteer Experience', profile.volunteer_text],
+    ['Awards and Honours', profile.awards_text],
+    ['Languages', profile.languages_text],
+    ['Professional Interests', profile.interests_text],
+  ]
 
   return (
     <Document
@@ -221,96 +229,87 @@ export default function ResumePDF({ ai, jobTitle, company, profile }: Props) {
       producer="Applytics"
     >
       <Page size="A4" style={s.page}>
-
-        {/* ── HEADER ────────────────────────────────────────── */}
         <View style={s.header}>
           <Text style={s.name}>{profile.full_name}</Text>
           <View style={s.contactRow}>
-            {contacts.map((c, i) => (
-              <View key={i} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                {i > 0 && <Text style={s.contactSep}>|</Text>}
-                {c.href
-                  ? <Link src={c.href} style={s.contactLink}><Text>{c.text}</Text></Link>
-                  : <Text style={s.contactItem}>{c.text}</Text>
-                }
+            {contacts.map((contact, index) => (
+              <View key={`${contact.text}-${index}`} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                {index > 0 && <Text style={s.contactSep}>|</Text>}
+                {contact.href ? (
+                  <Link src={contact.href} style={s.contactLink}>{contact.text}</Link>
+                ) : (
+                  <Text style={s.contactItem}>{contact.text}</Text>
+                )}
               </View>
             ))}
           </View>
         </View>
 
-        {/* ── PROFESSIONAL SUMMARY ──────────────────────────── */}
         {!!ai.summary && (
           <Section title="Professional Summary">
             <Text style={s.summary}>{ai.summary}</Text>
           </Section>
         )}
 
-        {/* ── SKILLS ────────────────────────────────────────── */}
         {(ai.skills_to_emphasize ?? []).length > 0 && (
           <Section title="Technical Skills">
-            <Text style={s.skillsText}>
-              {ai.skills_to_emphasize.join('  •  ')}
-            </Text>
+            <Text style={s.skillsText}>{ai.skills_to_emphasize.join(', ')}</Text>
           </Section>
         )}
 
-        {/* ── WORK EXPERIENCE ───────────────────────────────── */}
         {(ai.rewritten_experience ?? []).length > 0 && (
-          <Section title="Work Experience">
-            {ai.rewritten_experience.map((exp, i) => (
-              <View key={i} style={s.entry}>
+          <Section title="Experience">
+            {ai.rewritten_experience.map((experience, index) => (
+              <View key={`${experience.company}-${index}`} style={s.entry} wrap>
                 <View style={s.entryHeaderRow}>
-                  <Text style={s.entryTitle}>{exp.role}</Text>
-                  {exp.duration && <Text style={s.entryDate}>{exp.duration}</Text>}
+                  <View style={s.entryPrimary}>
+                    <Text style={s.entryTitle}>{experience.company}</Text>
+                    <Text style={s.entrySub}>{experience.role}</Text>
+                  </View>
+                  {!!experience.duration && <Text style={s.entryDate}>{experience.duration}</Text>}
                 </View>
-                <Text style={s.entrySub}>{exp.company}</Text>
-                {exp.bullets.map((b, j) => <Bullet key={j} text={b} />)}
+                {experience.bullets.map((bullet, bulletIndex) => (
+                  <Bullet key={`${index}-${bulletIndex}`} text={bullet} />
+                ))}
               </View>
             ))}
           </Section>
         )}
 
-        {/* ── PROJECTS ──────────────────────────────────────── */}
         {(ai.rewritten_projects ?? []).length > 0 && (
           <Section title="Projects">
-            {ai.rewritten_projects.map((proj, i) => (
-              <View key={i} style={s.entry}>
-                <Text style={s.entryTitle}>{proj.title}</Text>
-                {proj.bullets.map((b, j) => <Bullet key={j} text={b} />)}
+            {ai.rewritten_projects.map((project, index) => (
+              <View key={`${project.title}-${index}`} style={s.entry} wrap>
+                <Text style={s.entryTitle}>{project.title}</Text>
+                {project.bullets.map((bullet, bulletIndex) => (
+                  <Bullet key={`${index}-${bulletIndex}`} text={bullet} />
+                ))}
               </View>
             ))}
           </Section>
         )}
 
-        {/* ── EDUCATION ─────────────────────────────────────── */}
         {(profile.university || profile.degree) && (
           <Section title="Education">
-            <View style={s.entry}>
-              <View style={s.eduHeaderRow}>
-                <Text style={s.eduTitle}>{profile.university}</Text>
-                {profile.graduation_status && (
-                  <Text style={s.entryDate}>{profile.graduation_status}</Text>
-                )}
+            <View style={s.entry} wrap>
+              <View style={s.entryHeaderRow}>
+                <View style={s.entryPrimary}>
+                  {!!profile.university && <Text style={s.educationTitle}>{profile.university}</Text>}
+                  {!!profile.degree && <Text style={s.educationSub}>{profile.degree}</Text>}
+                </View>
+                {!!profile.graduation_status && <Text style={s.entryDate}>{profile.graduation_status}</Text>}
               </View>
-              {profile.degree && <Text style={s.eduSub}>{profile.degree}</Text>}
             </View>
           </Section>
         )}
 
-        {[
-          ['Certifications', profile.certifications_text],
-          ['Publications and Research', profile.publications_text],
-          ['Test Scores', profile.test_scores_text],
-          ['Volunteer Experience', profile.volunteer_text],
-          ['Awards and Honours', profile.awards_text],
-          ['Languages', profile.languages_text],
-          ['Professional Interests', profile.interests_text],
-        ].map(([title, value]) => typeof value === 'string' && value.trim() ? (
-          <Section key={title ?? 'profile-section'} title={title ?? 'Additional Information'}>
-            <Text style={s.profileText}>{value.trim()}</Text>
-          </Section>
-        ) : null)}
-
+        {additionalSections.map(([title, value]) => (
+          typeof value === 'string' && value.trim() ? (
+            <Section key={title} title={title}>
+              <Text style={s.profileText}>{value.trim()}</Text>
+            </Section>
+          ) : null
+        ))}
       </Page>
     </Document>
   )
