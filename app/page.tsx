@@ -14,23 +14,14 @@ import FinalCTA from '@/components/landing/FinalCTA'
 import FAQSection from '@/components/landing/FAQSection'
 import Footer from '@/components/landing/Footer'
 import type { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo'
+import StructuredData from '@/components/seo/StructuredData'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Job search tools for Pakistan',
   description: 'Find current listings, tailor a resume to a selected role, and keep applications connected during Applytics early access.',
-  keywords: ['jobs in Pakistan', 'resume tailoring', 'application tracker', 'CV', 'career'],
-  openGraph: {
-    title: 'Applytics | Job search tools for Pakistan',
-    description: 'Find current listings, tailor a resume to a selected role, and keep applications connected.',
-    siteName: 'Applytics',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Applytics | Job search tools for Pakistan',
-    description: 'Find current listings, tailor a resume to a selected role, and keep applications connected.',
-  },
-}
+  path: '/',
+})
 
 export default async function RootPage() {
   const { userId } = await auth()
@@ -41,6 +32,7 @@ export default async function RootPage() {
   // Unauthenticated users see the landing page
   return (
     <main className="min-h-[100dvh] flex flex-col" style={{ background: 'var(--canvas)' }}>
+      <StructuredData />
       <Navbar />
       <Hero />
       <ProblemSection />

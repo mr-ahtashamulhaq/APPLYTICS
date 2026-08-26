@@ -1,10 +1,13 @@
 import { SignUp } from '@clerk/nextjs'
 import Image from 'next/image'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Create an Applytics account',
+export const metadata = createPageMetadata({
+  title: 'Create an account',
   description: 'Create a free early-access account to find listings, tailor resumes, and track applications.',
-}
+  path: '/sign-up',
+  noIndex: true,
+})
 
 export default function SignUpPage() {
   return (

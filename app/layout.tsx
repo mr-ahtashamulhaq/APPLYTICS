@@ -22,7 +22,6 @@ export const metadata: Metadata = {
   },
   description: 'Find jobs, tailor a resume to a selected listing, and track applications in one place.',
   keywords: ['jobs in Pakistan', 'resume tailoring', 'application tracker', 'CV', 'career'],
-  alternates: { canonical: '/' },
   icons: { icon: '/applytics-logo.png' },
   openGraph: {
     title: 'Applytics | Job search tools for Pakistan',
@@ -30,11 +29,13 @@ export const metadata: Metadata = {
     siteName: 'Applytics',
     locale: 'en_PK',
     type: 'website',
+    images: [{ url: '/og-applytics.png', width: 1200, height: 630, alt: 'Applytics, a clearer job search for Pakistan' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Applytics | Job search tools for Pakistan',
     description: 'Find jobs, tailor a resume to a selected listing, and track applications in one place.',
+    images: ['/og-applytics.png'],
   },
 }
 

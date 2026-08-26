@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Privacy Policy',
   description: 'How Applytics collects, uses, stores, and protects information during early access.',
-}
+  path: '/privacy',
+})
 
 const updated = 'August 24, 2026'
 

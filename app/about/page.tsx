@@ -4,19 +4,19 @@ import Link from 'next/link'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 import Navbar from '@/components/landing/Navbar'
 import Footer from '@/components/landing/Footer'
+import { createPageMetadata } from '@/lib/seo'
+import StructuredData from '@/components/seo/StructuredData'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'About Applytics',
   description: 'Why Applytics is being built for Pakistani students and early-career job seekers.',
-  openGraph: {
-    title: 'About Applytics',
-    description: 'Why Applytics is being built for Pakistani students and early-career job seekers.',
-  },
-}
+  path: '/about',
+})
 
 export default function AboutPage() {
   return (
     <main className="min-h-[100dvh] flex flex-col" style={{ background: 'var(--canvas)' }}>
+      <StructuredData />
       <Navbar />
 
       <section className="w-full pt-28 md:pt-36 pb-16 md:pb-24" style={{ background: 'var(--canvas)' }}>

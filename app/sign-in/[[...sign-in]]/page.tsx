@@ -1,10 +1,13 @@
 import { SignIn } from '@clerk/nextjs'
 import Image from 'next/image'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Applytics',
+export const metadata = createPageMetadata({
+  title: 'Sign in',
   description: 'Sign in to your Applytics account.',
-}
+  path: '/sign-in',
+  noIndex: true,
+})
 
 export default function SignInPage() {
   return (
