@@ -25,10 +25,8 @@ export default function TermsPage() {
       <div className="mx-auto max-w-[720px] px-6 py-20 md:py-24">
         <Link href="/" className="mb-10 inline-flex min-h-11 items-center text-sm font-medium" style={{ color: 'var(--steel)' }}>Back to home</Link>
         <header className="mb-12 border-b pb-8" style={{ borderColor: 'var(--hairline)' }}>
-          <p className="text-label mb-3" style={{ color: 'var(--brand-red)' }}>Legal draft</p>
           <h1 className="text-h1" style={{ color: 'var(--ink-deep)' }}>Terms of Use</h1>
           <p className="mt-2 text-sm" style={{ color: 'var(--stone)' }}>Last updated: {updated}</p>
-          <p className="mt-4 text-sm leading-6" style={{ color: 'var(--charcoal)' }}>This draft describes the current Applytics early-access service. A qualified lawyer must review it before publication.</p>
         </header>
 
         <div className="flex flex-col gap-8 text-base leading-7" style={{ color: 'var(--charcoal)' }}>
