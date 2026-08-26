@@ -10,7 +10,7 @@ const FOOTER_LINKS = {
     { label: 'Research',    href: '/research' },
   ],
   Company: [
-    { label: 'About', href: '/#mission' },
+    { label: 'About', href: '/about' },
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Use', href: '/terms' },
     { label: 'Contact', href: 'mailto:hello@applytics.online' },

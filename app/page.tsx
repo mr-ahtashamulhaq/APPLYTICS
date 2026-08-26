@@ -9,6 +9,7 @@ import VisionSection from '@/components/landing/VisionSection'
 import WhoItsFor from '@/components/landing/WhoItsFor'
 import PricingSection from '@/components/landing/PricingSection'
 import MissionBand from '@/components/landing/MissionBand'
+import FounderSection from '@/components/landing/FounderSection'
 import FinalCTA from '@/components/landing/FinalCTA'
 import FAQSection from '@/components/landing/FAQSection'
 import Footer from '@/components/landing/Footer'
@@ -47,9 +48,10 @@ export default async function RootPage() {
       <Features />
       <VisionSection />
       <WhoItsFor />
-              <PricingSection />
-        <FAQSection />
-        <MissionBand />
+      <PricingSection />
+      <FAQSection />
+      <FounderSection />
+      <MissionBand />
 
       <FinalCTA />
       <Footer />
